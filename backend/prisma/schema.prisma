@@ -1,0 +1,75 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+}
+
+model Faculty {
+  id            Int    @id @default(autoincrement())
+  name          String
+  department    String
+  qualification String
+  experience    String
+  photoUrl      String
+  bio           String
+}
+
+model Alumni {
+  id              Int     @id @default(autoincrement())
+  name            String
+  batch           String
+  currentPosition String
+  company         String
+  achievement     String
+  photoUrl        String
+  linkedin        String?
+}
+
+model Gallery {
+  id         Int    @id @default(autoincrement())
+  type       String // "image" or "video"
+  url        String
+  category   String // "Campus", "Sports", "Labs", "Events", "Other"
+  orderIndex Int    @default(0)
+}
+
+model Blog {
+  id            Int      @id @default(autoincrement())
+  title         String
+  content       String
+  slug          String   @unique
+  category      String
+  featuredImage String
+  draft         Boolean  @default(true)
+  publishedAt   DateTime @default(now())
+}
+
+model Event {
+  id          Int    @id @default(autoincrement())
+  title       String
+  date        String // Format: YYYY-MM-DD
+  description String
+  location    String
+}
+
+model News {
+  id       Int    @id @default(autoincrement())
+  title    String
+  date     String // Format: YYYY-MM-DD
+  content  String
+  imageUrl String
+}
+
+model PageContent {
+  key   String @id @unique // "home", "about", "payment", "contact", "seo"
+  value String // JSON string payload of fields
+}

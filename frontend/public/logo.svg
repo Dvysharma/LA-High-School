@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="100%" height="100%">
+  <defs>
+    <style>
+      .crest-bg { fill: #233F92; }
+      .crest-gold { fill: #F29B38; }
+      .crest-red { fill: #B52A2A; }
+      .text-title { font-family: 'Montserrat', 'Inter', sans-serif; font-weight: 700; font-size: 24px; fill: #233F92; letter-spacing: 1px; }
+      .text-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 600; font-size: 16px; fill: #B52A2A; }
+      .text-location { font-family: 'Montserrat', 'Inter', sans-serif; font-weight: 600; font-size: 11px; fill: #F29B38; letter-spacing: 3px; }
+      .text-crest { font-family: 'Playfair Display', serif; font-weight: bold; font-size: 32px; fill: #FFFFFF; }
+    </style>
+    <linearGradient id="crestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#233F92;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#172a60;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Mark / Crest -->
+  <g transform="translate(10, 10)">
+    <!-- Outer Golden Ring -->
+    <circle cx="50" cy="50" r="48" fill="none" stroke="#F29B38" stroke-width="2.5" />
+    <!-- Inner Red Shield/Circle -->
+    <circle cx="50" cy="50" r="42" fill="url(#crestGrad)" />
+    <!-- Shield Outline -->
+    <path d="M 50,18 C 58,18 68,22 68,32 C 68,52 50,78 50,78 C 50,78 32,52 32,32 C 32,22 42,18 50,18 Z" fill="#B52A2A" />
+    <!-- Crest Letters 'L' and 'A' -->
+    <text x="50" y="48" class="text-crest" text-anchor="middle" dominant-baseline="middle">L</text>
+    <text x="50" y="58" class="text-crest" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#F29B38">A</text>
+    <!-- Laurel Wreath Details -->
+    <path d="M 18,50 C 18,70 34,82 50,82 C 66,82 82,70 82,50" fill="none" stroke="#F29B38" stroke-width="2" stroke-dasharray="2,3" />
+  </g>
+
+  <!-- Typography / School Name -->
+  <g transform="translate(125, 45)">
+    <!-- Primary Title -->
+    <text x="0" y="0" class="text-title">LA THE HIGHER SCHOOL</text>
+    <!-- Tagline / Motto -->
+    <text x="0" y="24" class="text-subtitle">Empowering Minds, Shaping Futures</text>
+    <!-- Location -->
+    <text x="0" y="46" class="text-location">KARNAL</text>
+  </g>
+</svg>

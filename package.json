@@ -1,0 +1,14 @@
+{
+  "name": "la-school-root",
+  "version": "1.0.0",
+  "description": "Root workspace for LA The Higher School, Karnal website",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "build:all": "npm run build --prefix backend && npm run build --prefix frontend",
+    "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

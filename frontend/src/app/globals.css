@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-heading: var(--font-playfair), serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-nav: var(--font-montserrat), sans-serif;
+
+  /* Premium Institutional Color Palette */
+  --color-primary: #B52A2A;      /* Deep Red */
+  --color-secondary: #233F92;    /* Royal Blue */
+  --color-accent: #F29B38;       /* Golden Orange */
+  --color-bg-light: #F8F8F8;
+  --color-text-main: #1A1A1A;
+  --color-text-muted: #555555;
+
+  /* Custom Transitions & Timings */
+  --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Glassmorphism utility */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #B52A2A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #233F92;
+}
+
+/* Smooth zoom-in on hover for premium layouts */
+.hover-zoom-img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-zoom-container:hover .hover-zoom-img {
+  transform: scale(1.05);
+}
+
+/* Text reveal animation classes */
+.text-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #B52A2A;
+  transform: translateX(-101%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-reveal:hover .text-reveal::after {
+  transform: translateX(101%);
+}
