@@ -64,7 +64,7 @@ export default function AlumniPage() {
           </h1>
           <div className="w-16 h-[3px] bg-accent mx-auto mb-6" />
           <p className="font-body text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            LA graduates have gone on to shape fields from AI research at Google to specialized healthcare, entrepreneurship, and public service.
+            Lather High School graduates have gone on to shape fields from AI research at Google to specialized healthcare, entrepreneurship, and public service.
           </p>
         </div>
       </section>

@@ -155,3 +155,21 @@ export const getEvents = () => apiFetch<SchoolEvent[]>('/cms/event');
 export const getNews = () => apiFetch<SchoolNews[]>('/cms/news');
 export const getPaymentPage = () => apiFetch<PaymentPageData>('/cms/page/payment');
 export const getContact = () => apiFetch<ContactData>('/cms/page/contact');
+export interface DonationPageData {
+  slogan: string;
+  description: string;
+  qrCodeUrl: string;
+  bankDetails: {
+    bankName: string;
+    accountName: string;
+    accountNumber: string;
+    ifsc: string;
+    branch: string;
+  };
+  causes: Array<{
+    id: string;
+    title: string;
+    description: string;
+  }>;
+}
+export const getDonationPage = () => apiFetch<DonationPageData>('/cms/page/donation');

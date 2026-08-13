@@ -1,7 +1,7 @@
 {
   "name": "la-school-backend",
   "version": "1.0.0",
-  "description": "Backend API server for LA The Higher School, Karnal",
+  "description": "Backend API server for Lather High School, Karnal",
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",

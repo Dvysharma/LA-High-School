@@ -500,16 +500,7 @@ export default function AdminDashboardPage() {
             About Legacy
           </button>
           
-          <button
-            onClick={() => setActiveTab("faculty")}
-            className={`w-full text-left py-3 px-4 rounded-xl flex items-center gap-3 transition-colors cursor-pointer ${
-              activeTab === "faculty" ? "bg-primary text-white" : "text-white/60 hover:bg-white/5"
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            Faculty Directory
-          </button>
-          
+
           <button
             onClick={() => setActiveTab("alumni")}
             className={`w-full text-left py-3 px-4 rounded-xl flex items-center gap-3 transition-colors cursor-pointer ${

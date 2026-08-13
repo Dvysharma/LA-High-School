@@ -9,9 +9,9 @@ import { Menu, X, ChevronDown, User, ShieldAlert, GraduationCap } from "lucide-r
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Our Faculty", href: "/faculty" },
   { name: "Our Alumni", href: "/alumni" },
-  { name: "Fees & Support", href: "/payment" },
+  { name: "Fees & Billing", href: "/payment" },
+  { name: "Donate", href: "/donation" },
   { name: "Blog", href: "/blog" },
 ];
 
@@ -88,7 +88,7 @@ export default function Navbar() {
                 LATHER HIGH SCHOOL
               </span>
               <span className={`font-body text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 ${isHome && !scrolled ? "text-white/70" : "text-gray-500"}`}>
-                Karnal
+                Karnal • UKG to 12th Class
               </span>
             </div>
           </Link>

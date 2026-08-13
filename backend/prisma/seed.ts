@@ -34,14 +34,14 @@ async function main() {
   const homeContent = {
     hero: {
       tagline: 'Empowering Minds, Shaping Futures',
-      subtitle: 'Welcome to Lather High School, Karnal. A legacy of academic excellence, premium infrastructure, and holistic character building.',
+      subtitle: 'Welcome to Lather High School, Karnal (UKG to 12th Class). A legacy of academic excellence, premium infrastructure, and holistic character building.',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-group-of-students-walking-in-a-university-campus-34384-large.mp4', // Premium educational royalty-free video
       ctaPrimary: 'Admissions open 2026-27',
       ctaSecondary: 'Explore Campus'
     },
     welcome: {
       title: 'Principal\'s Welcome Message',
-      text: 'At Lather High School, Karnal, we believe that education is not merely the acquisition of knowledge but the spark that ignites a lifelong journey of discovery. Our custom-crafted curriculum integrates rigorous academics, state-of-the-art facilities, and competitive athletics. We are dedicated to nurturing resilient, empathetic, and intellectually curious individuals who are prepared to make meaningful contributions to the global community. I invite you to explore our campus and witness the vibrant spirit that makes Lather High School a premier choice for education.',
+      text: 'At Lather High School, Karnal (UKG to 12th Class), we believe that education is not merely the acquisition of knowledge but the spark that ignites a lifelong journey of discovery. Our custom-crafted curriculum integrates rigorous academics, state-of-the-art facilities, and competitive athletics. We are dedicated to nurturing resilient, empathetic, and intellectually curious individuals who are prepared to make meaningful contributions to the global community. I invite you to explore our campus and witness the vibrant spirit that makes Lather High School a premier choice for education.',
       image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=800',
       principalName: 'Dr. Anuradha Sharma',
       principalTitle: 'Principal, Lather High School'
@@ -277,7 +277,7 @@ async function main() {
       { question: 'What is the schedule of quarterly fee payment?', answer: 'Fees must be paid on or before the 10th of April, July, October, and January.' },
       { question: 'Are there any late fee penalties?', answer: 'A late fee penalty of Rs. 100 per day will be applicable after the due date.' },
       { question: 'Can I pay online using credit cards?', answer: 'Yes, online card payments can be made by scanning our QR Code or via our direct bank portal transfers.' },
-      { question: 'Who should I contact for billing discrepancies?', answer: 'You can email accounts@lathehigherschool.edu.in or call our billing desk at +91 184 2252531.' }
+      { question: 'Who should I contact for billing discrepancies?', answer: 'You can email accounts@latherhigherschool.edu.in or call our billing desk at +91 94665 18003, +91 81686 53159.' }
     ]
   };
 
@@ -290,10 +290,38 @@ async function main() {
     },
   });
 
+  // Seed Donation page details
+  const donationContent = {
+    slogan: 'Together, We Can Shape More Futures',
+    description: 'For generations, our school has believed that education has the power to transform lives. Your contribution can help us extend that opportunity further supporting students, strengthening educational resources, and creating better opportunities for the generations to come.',
+    qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=la.higherschool@sbi&pn=LA%20The%20Higher%20School&cu=INR',
+    bankDetails: {
+      bankName: 'State Bank of India',
+      accountName: 'LATHER HIGH SCHOOL SOCIETY',
+      accountNumber: '39485720194',
+      ifsc: 'SBIN0001048',
+      branch: 'Sector 12 Branch, Karnal',
+    },
+    causes: [
+      { id: 'scholarship', title: 'Student Scholarships', description: 'Help talented students from economically weaker sections access quality education.' },
+      { id: 'infrastructure', title: 'Infrastructure Development', description: 'Support modern smart classrooms, green campus solar initiatives, and sports arenas.' },
+      { id: 'library', title: 'Library & Tech Labs', description: 'Fund modern books, digital research journals, coding kits, and robotics equipment.' }
+    ]
+  };
+
+  await prisma.pageContent.upsert({
+    where: { key: 'donation' },
+    update: {},
+    create: {
+      key: 'donation',
+      value: JSON.stringify(donationContent),
+    },
+  });
+
   // Seed Contact details
   const contactContent = {
-    phone: '+91 184 2252531, +91 98960 12345',
-    email: 'info@lathehigherschool.edu.in, admissions@lathehigherschool.edu.in',
+    phone: '+91 94665 18003, +91 81686 53159',
+    email: 'info@latherhigherschool.edu.in, admissions@latherhigherschool.edu.in',
     address: 'Sector 12, GT Road Bypass, Karnal, Haryana - 132001',
     mapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.527390977239!2d76.9740523!3d29.684128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e719c8fba56cf%3A0xe54d8a1fc414589d!2sKarnal%2C%20Haryana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
     officeHours: 'Monday - Saturday: 8:00 AM - 3:00 PM'

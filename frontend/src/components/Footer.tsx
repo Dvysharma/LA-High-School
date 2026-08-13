@@ -52,7 +52,7 @@ export default function Footer() {
                 LATHER HIGH SCHOOL
               </span>
               <span className="text-[9px] uppercase tracking-[0.2em] text-white/50">
-                Karnal
+                Karnal • UKG to 12th Class
               </span>
             </div>
           </div>
@@ -60,16 +60,13 @@ export default function Footer() {
             Lather High School is a premier co-educational boarding-cum-day school committed to academic mastery, athletic dominance, and nurturing empathetic, world-class leaders.
           </p>
           <div className="flex items-center gap-3.5 mt-2">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 hover:bg-primary hover:text-white rounded-full transition-all duration-300" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/19K3kuSf12/" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 hover:bg-primary hover:text-white rounded-full transition-all duration-300" aria-label="Facebook">
               <FaFacebook className="w-4 h-4" />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 hover:bg-primary hover:text-white rounded-full transition-all duration-300" aria-label="Twitter">
-              <FaTwitter className="w-4 h-4" />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 hover:bg-primary hover:text-white rounded-full transition-all duration-300" aria-label="Instagram">
+            <a href="https://instagram.com/invites/contact/?igsh=13t5mrk5sq4so&utm_content=xj3u58k" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 hover:bg-primary hover:text-white rounded-full transition-all duration-300" aria-label="Instagram">
               <FaInstagram className="w-4 h-4" />
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 hover:bg-primary hover:text-white rounded-full transition-all duration-300" aria-label="YouTube">
+            <a href="https://youtube.com/@latherhighschool306?si=wSC_0V9AerDG-jYh" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 hover:bg-primary hover:text-white rounded-full transition-all duration-300" aria-label="YouTube">
               <FaYoutube className="w-4 h-4" />
             </a>
           </div>
@@ -83,13 +80,13 @@ export default function Footer() {
               <Link href="/about" className="hover:text-primary transition-colors">Our History & Legacy</Link>
             </li>
             <li>
-              <Link href="/faculty" className="hover:text-primary transition-colors">Faculty Directory</Link>
-            </li>
-            <li>
               <Link href="/alumni" className="hover:text-primary transition-colors">Alumni Network</Link>
             </li>
             <li>
-              <Link href="/payment" className="hover:text-primary transition-colors">Fees Structure & Support</Link>
+              <Link href="/payment" className="hover:text-primary transition-colors">Fees & Billing</Link>
+            </li>
+            <li>
+              <Link href="/donation" className="hover:text-primary transition-colors">Support & Donations</Link>
             </li>
             <li>
               <Link href="/blog" className="hover:text-primary transition-colors">School News & Blog</Link>
@@ -110,11 +107,11 @@ export default function Footer() {
             </li>
             <li className="flex gap-3 items-center">
               <Phone className="w-5 h-5 text-accent shrink-0" />
-              <span>+91 184 2252531</span>
+              <span>+91 94665 18003, +91 81686 53159</span>
             </li>
             <li className="flex gap-3 items-center">
               <Mail className="w-5 h-5 text-accent shrink-0" />
-              <span className="break-all">info@lathehigherschool.edu.in</span>
+              <span className="break-all">info@latherhigherschool.edu.in</span>
             </li>
           </ul>
         </div>

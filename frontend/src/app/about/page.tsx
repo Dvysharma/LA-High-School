@@ -105,7 +105,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Key Milestones</span>
-            <h2 className="font-heading text-3xl font-bold text-gray-900 mt-2">The LA Timeline</h2>
+            <h2 className="font-heading text-3xl font-bold text-gray-900 mt-2">Lather High School Timeline</h2>
           </div>
 
           <div className="relative border-l-2 border-primary/20 ml-4 md:ml-32">

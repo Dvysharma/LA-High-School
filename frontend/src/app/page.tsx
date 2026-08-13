@@ -13,14 +13,14 @@ import { getHomepage, getEvents, getNews, getGallery, HomepageData, SchoolEvent,
 const fallbackHome: HomepageData = {
   hero: {
     tagline: "Empowering Minds, Shaping Futures",
-    subtitle: "Welcome to Lather High School, Karnal. A legacy of academic excellence, premium infrastructure, and holistic character building.",
+    subtitle: "Welcome to Lather High School, Karnal (UKG to 12th Class). A legacy of academic excellence, premium infrastructure, and holistic character building.",
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-group-of-students-walking-in-a-university-campus-34384-large.mp4",
     ctaPrimary: "Admissions open 2026-27",
     ctaSecondary: "Explore Campus"
   },
   welcome: {
     title: "Principal's Welcome Message",
-    text: "At Lather High School, Karnal, we believe that education is not merely the acquisition of knowledge but the spark that ignites a lifelong journey of discovery. Our custom-crafted curriculum integrates rigorous academics, state-of-the-art facilities, and competitive athletics. We are dedicated to nurturing resilient, empathetic, and intellectually curious individuals who are prepared to make meaningful contributions to the global community. I invite you to explore our campus and witness the vibrant spirit that makes Lather High School a premier choice for education.",
+    text: "At Lather High School, Karnal (UKG to 12th Class), we believe that education is not merely the acquisition of knowledge but the spark that ignites a lifelong journey of discovery. Our custom-crafted curriculum integrates rigorous academics, state-of-the-art facilities, and competitive athletics. We are dedicated to nurturing resilient, empathetic, and intellectually curious individuals who are prepared to make meaningful contributions to the global community. I invite you to explore our campus and witness the vibrant spirit that makes Lather High School a premier choice for education.",
     image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=800",
     principalName: "Dr. Anuradha Sharma",
     principalTitle: "Principal, Lather High School"
@@ -48,7 +48,7 @@ const fallbackEvents: SchoolEvent[] = [
 
 const fallbackNews: SchoolNews[] = [
   { id: 1, title: "Lather High School Tops District CBSE Ranks", date: "2026-06-02", content: "Our senior secondary students secured 100% pass percentages with 35 students scoring above 95% in CBSE boards.", imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800" },
-  { id: 2, title: "Students Win National Robotics Olympiad", date: "2026-07-20", content: "The LA Robotics club secured the gold trophy in the Junior Autonomous Vehicle division in Delhi.", imageUrl: "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&q=80&w=800" }
+  { id: 2, title: "Students Win National Robotics Olympiad", date: "2026-07-20", content: "The Lather High School Robotics club secured the gold trophy in the Junior Autonomous Vehicle division in Delhi.", imageUrl: "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&q=80&w=800" }
 ];
 
 const fallbackGallery: GalleryItem[] = [
@@ -267,6 +267,74 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* NEW. SCHOOL CULTURE SECTION */}
+      <section className="py-24 bg-white px-6 lg:px-8 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Our School Culture</span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-4 leading-tight">
+              Life & Values at Lather High School
+            </h2>
+            <div className="w-12 h-[3px] bg-accent mx-auto mb-4" />
+            <p className="font-body text-gray-500">
+              A glimpse into the daily lives of our students, where spiritual harmony and deep academic focus blend to build complete characters.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            {/* Prayer and Spiritual assembly */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-bg-light border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="h-80 relative overflow-hidden bg-gray-100">
+                <img 
+                  src="/prayer.png" 
+                  alt="Students Doing Morning Prayer" 
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Spiritual Harmony & Morning Assembly</h3>
+                <p className="font-body text-sm text-gray-500 leading-relaxed">
+                  Our daily schedule begins with morning prayer and meditation. Fostering discipline, gratitude, and a shared feeling of unity, our assemblies set a peaceful and positive tone for the day's study and academic activities.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Study and Academic hours */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-bg-light border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="h-80 relative overflow-hidden bg-gray-100">
+                <img 
+                  src="/study.png" 
+                  alt="Students Studying in Library" 
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Academic Dedication & Collaborative Study</h3>
+                <p className="font-body text-sm text-gray-500 leading-relaxed">
+                  Through structured study periods and modern library resources, students collaborate on projects and practice active learning. Our educators guide them to develop key research skills, critical analysis, and collaborative solutions.
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
+
+        </div>
+      </section>
+
       {/* 4. ACHIEVEMENTS / COUNTERS */}
       <section className="relative py-20 bg-secondary text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary to-indigo-950 opacity-90 z-10" />
@@ -390,7 +458,7 @@ export default function HomePage() {
             <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative">
               <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10" />
               <p className="font-body text-sm text-gray-500 leading-relaxed mb-6 italic">
-                "Our son's transformation at LA has been incredible. The focus on coding, debate, and outdoor sports has built a level of independence and analytical clarity that traditional syllabus schooling could never accomplish. Truly Karnal's premium school!"
+                "Our son's transformation at Lather High School has been incredible. The focus on coding, debate, and outdoor sports has built a level of independence and analytical clarity that traditional syllabus schooling could never accomplish. Truly Karnal's premium school!"
               </p>
               <div>
                 <h4 className="font-heading text-base font-bold text-gray-900">Dr. Sunita Mehta</h4>
@@ -401,7 +469,7 @@ export default function HomePage() {
             <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative">
               <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10" />
               <p className="font-body text-sm text-gray-500 leading-relaxed mb-6 italic">
-                "The residential life at LA feels like a cohesive global community. Faculty live on campus and are available to help with advanced math questions or chess strategies even at 8 PM. It has redefined student boarding for me."
+                "The residential life at Lather High School feels like a cohesive global community. Faculty live on campus and are available to help with advanced math questions or chess strategies even at 8 PM. It has redefined student boarding for me."
               </p>
               <div>
                 <h4 className="font-heading text-base font-bold text-gray-900">Kabir Chauhan</h4>

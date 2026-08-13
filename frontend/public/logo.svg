@@ -33,7 +33,7 @@
   <!-- Typography / School Name -->
   <g transform="translate(125, 45)">
     <!-- Primary Title -->
-    <text x="0" y="0" class="text-title">LA THE HIGHER SCHOOL</text>
+    <text x="0" y="0" class="text-title">LATHER HIGH SCHOOL</text>
     <!-- Tagline / Motto -->
     <text x="0" y="24" class="text-subtitle">Empowering Minds, Shaping Futures</text>
     <!-- Location -->
