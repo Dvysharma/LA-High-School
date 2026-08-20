@@ -102,13 +102,6 @@ export default function Navbar() {
           {/* Header CTAs */}
           <div className="hidden md:flex items-center gap-4">
             <Link
-              href="/admin/login"
-              className="flex items-center gap-1.5 font-nav text-xs font-semibold uppercase tracking-wider py-2 px-3.5 rounded-full transition-all duration-300 border border-gray-200 text-gray-700 hover:bg-gray-50"
-            >
-              <User className="w-3.5 h-3.5" />
-              Portal
-            </Link>
-            <Link
               href="/admission"
               className="font-nav text-xs font-semibold uppercase tracking-wider bg-primary hover:bg-primary/90 text-white py-2 px-5 rounded-full shadow-lg shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5"
             >
@@ -171,13 +164,6 @@ export default function Navbar() {
 
               {/* Extra Info & CTAs inside Drawer */}
               <div className="mt-auto flex flex-col gap-4">
-                <Link
-                  href="/admin/login"
-                  className="flex items-center justify-center gap-2 font-nav text-sm font-semibold uppercase tracking-wider py-3 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"
-                >
-                  <User className="w-4 h-4 text-primary" />
-                  Admin Login
-                </Link>
                 <Link
                   href="/admission"
                   className="flex items-center justify-center gap-2 font-nav text-sm font-semibold uppercase tracking-wider py-3 bg-primary hover:bg-primary/95 text-white rounded-xl shadow-lg shadow-primary/20 transition-all"

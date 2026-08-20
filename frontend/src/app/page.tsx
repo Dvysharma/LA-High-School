@@ -423,16 +423,6 @@ export default function HomePage() {
               <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Visual Narrative</span>
               <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-2">Campus Highlights</h2>
             </div>
-            <div className="flex gap-4">
-              {/* Fake upload button to preview CMS functionality */}
-              <Link
-                href="/admin/login"
-                className="font-nav text-xs font-semibold uppercase tracking-wider border border-gray-200 hover:bg-gray-50 text-gray-700 py-3 px-6 rounded-full flex items-center gap-1.5 transition-colors"
-              >
-                <Plus className="w-3.5 h-3.5 text-primary" />
-                Upload Photo
-              </Link>
-            </div>
           </div>
 
           {/* Grid Layout */}
