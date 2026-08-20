@@ -34,14 +34,14 @@ async function main() {
   const homeContent = {
     hero: {
       tagline: 'Empowering Minds, Shaping Futures',
-      subtitle: 'Welcome to Lather High School, Karnal (UKG to 12th Class). A legacy of academic excellence, premium infrastructure, and holistic character building.',
+      subtitle: 'Welcome to Lather High School, Karnal A distinguished institution offering education from UKG to Class 12. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-group-of-students-walking-in-a-university-campus-34384-large.mp4', // Premium educational royalty-free video
       ctaPrimary: 'Admissions open 2026-27',
       ctaSecondary: 'Explore Campus'
     },
     welcome: {
       title: 'Principal\'s Welcome Message',
-      text: 'At Lather High School, Karnal (UKG to 12th Class), we believe that education is not merely the acquisition of knowledge but the spark that ignites a lifelong journey of discovery. Our custom-crafted curriculum integrates rigorous academics, state-of-the-art facilities, and competitive athletics. We are dedicated to nurturing resilient, empathetic, and intellectually curious individuals who are prepared to make meaningful contributions to the global community. I invite you to explore our campus and witness the vibrant spirit that makes Lather High School a premier choice for education.',
+      text: 'At Lather High School, Karnal, we believe that education is about more than academic achievement. It is about nurturing curiosity, confidence, discipline, and strong values in every student.\n\nWe strive to provide a supportive environment where students can learn, grow, explore their talents, and develop into well-rounded individuals.\n\nOur goal is to prepare every child for a bright future with knowledge, character, and a sense of responsibility towards society.',
       image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=800',
       principalName: 'Dr. Anuradha Sharma',
       principalTitle: 'Principal, Lather High School'
@@ -49,37 +49,37 @@ async function main() {
     whyChooseUs: [
       {
         title: 'Experienced Faculty',
-        description: 'Our educators are leaders in their fields, bringing passion, innovation, and personalized guidance to every student.',
+        description: 'Dedicated and experienced teachers who guide students with care, encouragement, and individual attention.',
         icon: 'Award'
       },
       {
         title: 'Academic Excellence',
-        description: 'Consistent top CBSE ranks, robust college placement records, and comprehensive STEM & liberal arts curriculums.',
+        description: 'A strong focus on academic fundamentals, disciplined learning, and helping every student achieve their full potential.',
         icon: 'BookOpen'
       },
       {
-        title: 'Sports & Athletics',
-        description: 'Olympic-size swimming pool, professional tennis courts, and multi-sport indoor stadiums to nurture elite athletics.',
-        icon: 'Activity'
-      },
-      {
-        title: 'Advanced Tech & Labs',
-        description: 'Modern robotics labs, coding clubs, smart classrooms, and 3D printing equipment for active learning.',
-        icon: 'Cpu'
-      },
-      {
-        title: 'Secure & Green Campus',
-        description: 'A lush 15-acre campus with 24/7 smart surveillance, smart cards, and eco-friendly infrastructure.',
+        title: 'Values & Discipline',
+        description: 'We believe in building strong character through discipline, respect, responsibility, and good values.',
         icon: 'Shield'
       },
       {
-        title: 'Holistic Development',
-        description: 'Strong arts, music, dramatics, debates, and community services programs building well-rounded global citizens.',
+        title: 'Sports & Activities',
+        description: 'Encouraging students to participate in sports and co-curricular activities to develop confidence, teamwork, and a healthy spirit.',
+        icon: 'Activity'
+      },
+      {
+        title: 'Supportive Environment',
+        description: 'A caring and positive school environment where students feel encouraged to learn, express themselves, and grow.',
         icon: 'Sparkles'
+      },
+      {
+        title: 'Holistic Development',
+        description: 'We focus on the overall development of every child — nurturing knowledge, creativity, confidence, character, and social responsibility.',
+        icon: 'Cpu'
       }
     ],
     stats: {
-      yearsOfExcellence: 25,
+      yearsOfExcellence: 41,
       students: 1800,
       teachers: 120,
       awards: 85
@@ -97,17 +97,17 @@ async function main() {
 
   // Seed About Page content
   const aboutContent = {
-    history: 'Lather High School was founded in 2001 with a visionary spirit to establish a premier co-educational residential-cum-day school in Karnal, Haryana. Over the last two and a half decades, the school has evolved into an educational powerhouse, setting standards in progressive learning pedagogy, modern labs, and high-performance sports environments.',
+    history: 'Lather High School was founded in 1985 with a visionary spirit to establish a premier co-educational residential-cum-day school in Karnal, Haryana. Over the last four decades, the school has evolved into an educational powerhouse, setting standards in progressive learning pedagogy, modern labs, and high-performance sports environments.',
     mission: 'To provide a stimulating learning environment that encourages curiosity, critical thinking, creative expression, and moral character. We strive to mold students into confident, responsible, and skilled leaders of tomorrow.',
     vision: 'To be a globally recognized center of learning where academic rigor, ethical values, and holistic development prepare students to excel in a dynamic and interconnected world.',
     philosophy: 'Our academic philosophy, "Learning by Doing," is inspired by the best editorial schools. We combine traditional academic discipline with design thinking, collaborative group problem solving, and technological integration. Every student is mentored to pursue intellectual excellence alongside physical well-being, creative exploration, and social responsibility.',
     timeline: [
-      { year: '2001', event: 'Lather High School established in Karnal with 150 students.' },
+      { year: '1985', event: 'Lather High School established in Karnal with 150 students.' },
       { year: '2007', event: 'Inauguration of the state-of-the-art Science Wing and Library.' },
       { year: '2012', event: 'Received CBSE National Award for Academic Excellence.' },
       { year: '2018', event: 'Completion of the Sports Complex, featuring an indoor swimming pool.' },
       { year: '2023', event: 'Launched AI & Robotics center and implemented clean green solar-powered campus.' },
-      { year: '2026', event: 'Celebrating 25 years of educational excellence.' }
+      { year: '2026', event: 'Celebrating 41 years of educational excellence.' }
     ],
     infrastructure: [
       {
@@ -261,39 +261,12 @@ async function main() {
     await prisma.news.create({ data: news });
   }
 
-  // Seed Payment page details
-  const paymentContent = {
-    qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=la.higherschool@sbi&pn=LA%20The%20Higher%20School&cu=INR', // Live standard mock QR Code API
-    bankDetails: {
-      bankName: 'State Bank of India',
-      accountName: 'LATHER HIGH SCHOOL SOCIETY',
-      accountNumber: '39485720194',
-      ifsc: 'SBIN0001048',
-      branch: 'Sector 12 Branch, Karnal',
-      paymentModes: 'UPI, NEFT, IMPS, RTGS, Net Banking, and demand drafts'
-    },
-    feeCircularPdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Standard dummy PDF link
-    faqs: [
-      { question: 'What is the schedule of quarterly fee payment?', answer: 'Fees must be paid on or before the 10th of April, July, October, and January.' },
-      { question: 'Are there any late fee penalties?', answer: 'A late fee penalty of Rs. 100 per day will be applicable after the due date.' },
-      { question: 'Can I pay online using credit cards?', answer: 'Yes, online card payments can be made by scanning our QR Code or via our direct bank portal transfers.' },
-      { question: 'Who should I contact for billing discrepancies?', answer: 'You can email accounts@latherhigherschool.edu.in or call our billing desk at +91 94665 18003, +91 81686 53159.' }
-    ]
-  };
 
-  await prisma.pageContent.upsert({
-    where: { key: 'payment' },
-    update: {},
-    create: {
-      key: 'payment',
-      value: JSON.stringify(paymentContent),
-    },
-  });
 
   // Seed Donation page details
   const donationContent = {
     slogan: 'Together, We Can Shape More Futures',
-    description: 'For generations, our school has believed that education has the power to transform lives. Your contribution can help us extend that opportunity further supporting students, strengthening educational resources, and creating better opportunities for the generations to come.',
+    description: 'Education has the power to inspire lives and build a better tomorrow. Your support can help Lather High School provide greater opportunities for students, strengthen learning resources, and continue nurturing future generations. Every contribution, big or small, can make a meaningful difference in a student’s journey.',
     qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=la.higherschool@sbi&pn=LA%20The%20Higher%20School&cu=INR',
     bankDetails: {
       bankName: 'State Bank of India',
@@ -303,9 +276,7 @@ async function main() {
       branch: 'Sector 12 Branch, Karnal',
     },
     causes: [
-      { id: 'scholarship', title: 'Student Scholarships', description: 'Help talented students from economically weaker sections access quality education.' },
-      { id: 'infrastructure', title: 'Infrastructure Development', description: 'Support modern smart classrooms, green campus solar initiatives, and sports arenas.' },
-      { id: 'library', title: 'Library & Tech Labs', description: 'Fund modern books, digital research journals, coding kits, and robotics equipment.' }
+      { id: 'scholarship', title: 'Student Scholarships', description: 'Help talented students from economically weaker sections access quality education.' }
     ]
   };
 
@@ -322,7 +293,7 @@ async function main() {
   const contactContent = {
     phone: '+91 94665 18003, +91 81686 53159',
     email: 'info@latherhigherschool.edu.in, admissions@latherhigherschool.edu.in',
-    address: 'Sector 12, GT Road Bypass, Karnal, Haryana - 132001',
+    address: 'Pritam nagar karnal 132001',
     mapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.527390977239!2d76.9740523!3d29.684128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e719c8fba56cf%3A0xe54d8a1fc414589d!2sKarnal%2C%20Haryana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
     officeHours: 'Monday - Saturday: 8:00 AM - 3:00 PM'
   };

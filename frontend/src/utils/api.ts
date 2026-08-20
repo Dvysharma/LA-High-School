@@ -153,8 +153,15 @@ export const getBlogs = () => apiFetch<BlogPost[]>('/cms/blog');
 export const getBlogBySlug = (slug: string) => apiFetch<BlogPost>(`/cms/blog/${slug}`);
 export const getEvents = () => apiFetch<SchoolEvent[]>('/cms/event');
 export const getNews = () => apiFetch<SchoolNews[]>('/cms/news');
-export const getPaymentPage = () => apiFetch<PaymentPageData>('/cms/page/payment');
 export const getContact = () => apiFetch<ContactData>('/cms/page/contact');
+export const submitAdmissionForm = (data: any) => 
+  apiFetch<{ success: boolean; message: string }>('/cms/admission', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
 export interface DonationPageData {
   slogan: string;
   description: string;

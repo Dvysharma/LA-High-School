@@ -13,28 +13,28 @@ import { getHomepage, getEvents, getNews, getGallery, HomepageData, SchoolEvent,
 const fallbackHome: HomepageData = {
   hero: {
     tagline: "Empowering Minds, Shaping Futures",
-    subtitle: "Welcome to Lather High School, Karnal (UKG to 12th Class). A legacy of academic excellence, premium infrastructure, and holistic character building.",
+    subtitle: "Welcome to Lather High School, Karnal A distinguished institution offering education from UKG to Class 12. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.",
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-group-of-students-walking-in-a-university-campus-34384-large.mp4",
     ctaPrimary: "Admissions open 2026-27",
     ctaSecondary: "Explore Campus"
   },
   welcome: {
     title: "Principal's Welcome Message",
-    text: "At Lather High School, Karnal (UKG to 12th Class), we believe that education is not merely the acquisition of knowledge but the spark that ignites a lifelong journey of discovery. Our custom-crafted curriculum integrates rigorous academics, state-of-the-art facilities, and competitive athletics. We are dedicated to nurturing resilient, empathetic, and intellectually curious individuals who are prepared to make meaningful contributions to the global community. I invite you to explore our campus and witness the vibrant spirit that makes Lather High School a premier choice for education.",
+    text: "At Lather High School, Karnal, we believe that education is about more than academic achievement. It is about nurturing curiosity, confidence, discipline, and strong values in every student.\n\nWe strive to provide a supportive environment where students can learn, grow, explore their talents, and develop into well-rounded individuals.\n\nOur goal is to prepare every child for a bright future with knowledge, character, and a sense of responsibility towards society.",
     image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=800",
     principalName: "Dr. Anuradha Sharma",
     principalTitle: "Principal, Lather High School"
   },
   whyChooseUs: [
-    { title: "Experienced Faculty", description: "Our educators are leaders in their fields, bringing passion, innovation, and personalized guidance to every student.", icon: "Award" },
-    { title: "Academic Excellence", description: "Consistent top CBSE ranks, robust college placement records, and comprehensive STEM & liberal arts curriculums.", icon: "BookOpen" },
-    { title: "Sports & Athletics", description: "Olympic-size swimming pool, professional tennis courts, and multi-sport indoor stadiums to nurture elite athletics.", icon: "Activity" },
-    { title: "Advanced Tech & Labs", description: "Modern robotics labs, coding clubs, smart classrooms, and 3D printing equipment for active learning.", icon: "Cpu" },
-    { title: "Secure & Green Campus", description: "A lush 15-acre campus with 24/7 smart surveillance, smart cards, and eco-friendly infrastructure.", icon: "Shield" },
-    { title: "Holistic Development", description: "Strong arts, music, dramatics, debates, and community services programs building well-rounded global citizens.", icon: "Sparkles" }
+    { title: "Experienced Faculty", description: "Dedicated and experienced teachers who guide students with care, encouragement, and individual attention.", icon: "Award" },
+    { title: "Academic Excellence", description: "A strong focus on academic fundamentals, disciplined learning, and helping every student achieve their full potential.", icon: "BookOpen" },
+    { title: "Values & Discipline", description: "We believe in building strong character through discipline, respect, responsibility, and good values.", icon: "Shield" },
+    { title: "Sports & Activities", description: "Encouraging students to participate in sports and co-curricular activities to develop confidence, teamwork, and a healthy spirit.", icon: "Activity" },
+    { title: "Supportive Environment", description: "A caring and positive school environment where students feel encouraged to learn, express themselves, and grow.", icon: "Sparkles" },
+    { title: "Holistic Development", description: "We focus on the overall development of every child — nurturing knowledge, creativity, confidence, character, and social responsibility.", icon: "Cpu" }
   ],
   stats: {
-    yearsOfExcellence: 25,
+    yearsOfExcellence: 41,
     students: 1800,
     teachers: 120,
     awards: 85
@@ -145,7 +145,7 @@ export default function HomePage() {
             className="flex flex-col sm:flex-row gap-4"
           >
             <Link
-              href="/payment"
+              href="/admission"
               className="font-nav bg-primary hover:bg-primary/95 text-white py-3.5 px-8 rounded-full text-sm font-semibold uppercase tracking-wider shadow-lg shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
             >
               {homeData.hero.ctaPrimary}
@@ -300,9 +300,9 @@ export default function HomePage() {
                 />
               </div>
               <div className="p-8">
-                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Spiritual Harmony & Morning Assembly</h3>
+                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Morning Assembly & Values</h3>
                 <p className="font-body text-sm text-gray-500 leading-relaxed">
-                  Our daily schedule begins with morning prayer and meditation. Fostering discipline, gratitude, and a shared feeling of unity, our assemblies set a peaceful and positive tone for the day's study and academic activities.
+                  Each day begins with a meaningful morning assembly that encourages discipline, gratitude, positive thinking, and a strong sense of unity among our students. It sets a positive tone for the day ahead.
                 </p>
               </div>
             </motion.div>
@@ -323,9 +323,9 @@ export default function HomePage() {
                 />
               </div>
               <div className="p-8">
-                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Academic Dedication & Collaborative Study</h3>
+                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Academic Dedication & Learning</h3>
                 <p className="font-body text-sm text-gray-500 leading-relaxed">
-                  Through structured study periods and modern library resources, students collaborate on projects and practice active learning. Our educators guide them to develop key research skills, critical analysis, and collaborative solutions.
+                  We encourage students to develop strong study habits, curiosity, and a genuine interest in learning. With the guidance of our teachers, students are encouraged to think independently, work together, and build confidence in their abilities.
                 </p>
               </div>
             </motion.div>
@@ -363,85 +363,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. NEWS & TIMELINE EVENTS */}
-      <section className="py-24 bg-white px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-          
-          {/* Latest News Column */}
-          <div className="lg:col-span-7">
-            <div className="flex justify-between items-end mb-10">
-              <div>
-                <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Media Bulletin</span>
-                <h2 className="font-heading text-3xl font-bold text-gray-900 mt-2">Latest Campus News</h2>
-              </div>
-              <Link href="/blog" className="font-nav text-xs font-bold text-secondary hover:text-primary transition-colors flex items-center gap-1">
-                View All Blog Posts
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-            
-            <div className="flex flex-col gap-8">
-              {news.slice(0, 2).map((item) => (
-                <div key={item.id} className="grid grid-cols-1 sm:grid-cols-12 gap-6 bg-bg-light border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow group">
-                  <div className="sm:col-span-5 h-48 sm:h-auto relative overflow-hidden">
-                    <img src={item.imageUrl} alt={item.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="sm:col-span-7 p-6 flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs text-primary font-semibold">{new Date(item.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                      <h3 className="font-heading text-lg font-bold text-gray-900 mt-2 mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
-                      <p className="font-body text-sm text-gray-500 line-clamp-3 leading-relaxed">{item.content.replace(/<[^>]*>/g, '')}</p>
-                    </div>
-                    <Link href={`/blog`} className="font-nav text-xs font-semibold text-secondary hover:text-primary inline-flex items-center gap-1.5 mt-4">
-                      Read More
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Upcoming Events Column */}
-          <div className="lg:col-span-5">
-            <div className="mb-10">
-              <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Academic Calendar</span>
-              <h2 className="font-heading text-3xl font-bold text-gray-900 mt-2">Upcoming Events</h2>
-            </div>
-
-            <div className="flex flex-col gap-6">
-              {events.slice(0, 3).map((item) => {
-                const eventDate = new Date(item.date);
-                const day = eventDate.getDate();
-                const month = eventDate.toLocaleDateString('en-US', { month: 'short' });
-                return (
-                  <div key={item.id} className="flex gap-5 items-start bg-white border border-gray-100 p-5 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <div className="flex flex-col items-center justify-center bg-primary text-white w-14 h-14 rounded-xl shrink-0">
-                      <span className="font-heading text-xl font-bold leading-none">{day}</span>
-                      <span className="font-nav text-[10px] uppercase font-semibold mt-1">{month}</span>
-                    </div>
-                    <div className="flex flex-col gap-1.5">
-                      <h3 className="font-heading text-base font-bold text-gray-900 leading-snug">{item.title}</h3>
-                      <p className="font-body text-xs text-gray-500 line-clamp-2 leading-relaxed">{item.description}</p>
-                      <div className="flex items-center gap-4 text-[11px] text-gray-400 mt-1.5">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3 text-accent" />
-                          {item.date}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3 text-accent" />
-                          {item.location}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-        </div>
-      </section>
 
       {/* 6. TESTIMONIAL SLIDER */}
       <section className="py-24 bg-bg-light px-6 lg:px-8 border-y border-gray-100">

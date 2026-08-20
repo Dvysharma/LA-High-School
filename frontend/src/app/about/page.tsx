@@ -6,17 +6,17 @@ import { Compass, Eye, ShieldCheck, Library, Globe, Heart } from "lucide-react";
 import { getAboutpage, AboutpageData } from "@/utils/api";
 
 const fallbackAbout: AboutpageData = {
-  history: 'Lather High School was founded in 2001 with a visionary spirit to establish a premier co-educational residential-cum-day school in Karnal, Haryana. Over the last two and a half decades, the school has evolved into an educational powerhouse, setting standards in progressive learning pedagogy, modern labs, and high-performance sports environments.',
+  history: 'Lather High School was founded in 1985 with a visionary spirit to establish a premier co-educational residential-cum-day school in Karnal, Haryana. Over the last four decades, the school has evolved into an educational powerhouse, setting standards in progressive learning pedagogy, modern labs, and high-performance sports environments.',
   mission: 'To provide a stimulating learning environment that encourages curiosity, critical thinking, creative expression, and moral character. We strive to mold students into confident, responsible, and skilled leaders of tomorrow.',
   vision: 'To be a globally recognized center of learning where academic rigor, ethical values, and holistic development prepare students to excel in a dynamic and interconnected world.',
   philosophy: 'Our academic philosophy, "Learning by Doing," is inspired by the best editorial schools. We combine traditional academic discipline with design thinking, collaborative group problem solving, and technological integration. Every student is mentored to pursue intellectual excellence alongside physical well-being, creative exploration, and social responsibility.',
   timeline: [
-    { year: '2001', event: 'Lather High School established in Karnal with 150 students.' },
+    { year: '1985', event: 'Lather High School established in Karnal with 150 students.' },
     { year: '2007', event: 'Inauguration of the state-of-the-art Science Wing and Library.' },
     { year: '2012', event: 'Received CBSE National Award for Academic Excellence.' },
     { year: '2018', event: 'Completion of the Sports Complex, featuring an indoor swimming pool.' },
     { year: '2023', event: 'Launched AI & Robotics center and implemented clean green solar-powered campus.' },
-    { year: '2026', event: 'Celebrating 25 years of educational excellence.' }
+    { year: '2026', event: 'Celebrating 41 years of educational excellence.' }
   ],
   infrastructure: [
     { title: 'Smart Classrooms', description: 'Interactive touch panels, ergonomic seating, and individual smart devices integration.', image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=800' },
@@ -100,34 +100,7 @@ export default function AboutPage() {
 
       </section>
 
-      {/* 3. History Timeline (Timeline Layout) */}
-      <section className="py-20 bg-bg-light border-y border-gray-100 px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Key Milestones</span>
-            <h2 className="font-heading text-3xl font-bold text-gray-900 mt-2">Lather High School Timeline</h2>
-          </div>
 
-          <div className="relative border-l-2 border-primary/20 ml-4 md:ml-32">
-            {data.timeline.map((item, idx) => (
-              <div key={item.year} className="mb-10 ml-6 relative group">
-                {/* Timeline Dot */}
-                <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-primary group-hover:bg-primary transition-colors" />
-                
-                {/* Year tag for large screens */}
-                <div className="hidden md:block absolute -left-[140px] top-0.5 text-right w-24">
-                  <span className="font-heading text-xl font-bold text-primary">{item.year}</span>
-                </div>
-                
-                <div className="bg-white border border-gray-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
-                  <span className="inline-block md:hidden font-heading text-lg font-bold text-primary mb-1">{item.year}</span>
-                  <p className="font-body text-sm text-gray-600 leading-relaxed">{item.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 4. Infrastructure Showcase */}
       <section className="py-20 px-6 lg:px-8 max-w-7xl mx-auto">

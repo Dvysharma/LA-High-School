@@ -10,7 +10,7 @@ import { getDonationPage, DonationPageData } from "@/utils/api";
 
 const fallbackDonation: DonationPageData = {
   slogan: 'Together, We Can Shape More Futures',
-  description: 'For generations, our school has believed that education has the power to transform lives. Your contribution can help us extend that opportunity further supporting students, strengthening educational resources, and creating better opportunities for the generations to come.',
+  description: 'Education has the power to inspire lives and build a better tomorrow. Your support can help Lather High School provide greater opportunities for students, strengthen learning resources, and continue nurturing future generations. Every contribution, big or small, can make a meaningful difference in a student’s journey.',
   qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=la.higherschool@sbi&pn=LA%20The%20Higher%20School&cu=INR',
   bankDetails: {
     bankName: 'State Bank of India',
@@ -20,9 +20,7 @@ const fallbackDonation: DonationPageData = {
     branch: 'Sector 12 Branch, Karnal',
   },
   causes: [
-    { id: 'scholarship', title: 'Student Scholarships', description: 'Help talented students from economically weaker sections access quality education.' },
-    { id: 'infrastructure', title: 'Infrastructure Development', description: 'Support modern smart classrooms, green campus solar initiatives, and sports arenas.' },
-    { id: 'library', title: 'Library & Tech Labs', description: 'Fund modern books, digital research journals, coding kits, and robotics equipment.' }
+    { id: 'scholarship', title: 'Student Scholarships', description: 'Help talented students from economically weaker sections access quality education.' }
   ]
 };
 

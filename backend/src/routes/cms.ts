@@ -442,4 +442,17 @@ router.delete('/news/:id', authenticateToken, async (req: Request, res: Response
   }
 });
 
+// POST /api/cms/admission (Public)
+router.post('/admission', (req: Request, res: Response) => {
+  try {
+    const { name, gmail, className, contactNumber, emailId, basicInfo } = req.body;
+    console.log('New Admission Application Received:', { name, gmail, className, contactNumber, emailId, basicInfo });
+    res.json({ success: true, message: 'Admission application received successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to process admission request.' });
+  }
+});
+
 export default router;
+
+

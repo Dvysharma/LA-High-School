@@ -9,9 +9,9 @@ import { Menu, X, ChevronDown, User, ShieldAlert, GraduationCap } from "lucide-r
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Our Alumni", href: "/alumni" },
-  { name: "Fees & Billing", href: "/payment" },
+  { name: "Our Staff", href: "/staff" },
   { name: "Donate", href: "/donation" },
+  { name: "FAQ", href: "/faq" },
   { name: "Blog", href: "/blog" },
 ];
 
@@ -44,24 +44,12 @@ export default function Navbar() {
     setIsOpen(false);
   }, [pathname]);
 
-  const navbarBg = isHome
-    ? scrolled
-      ? "bg-white/95 backdrop-blur-md shadow-md py-4 border-b border-gray-100"
-      : "bg-transparent py-6 border-b border-white/10"
-    : "bg-white/95 backdrop-blur-md shadow-md py-4 border-b border-gray-100";
+  const navbarBg = "bg-white/95 backdrop-blur-md shadow-md py-4 border-b border-gray-100";
 
-  const textColor = isHome
-    ? scrolled
-      ? "text-gray-800"
-      : "text-white"
-    : "text-gray-800";
+  const textColor = "text-gray-800";
 
   const activeColor = "text-primary font-semibold";
-  const hoverColor = isHome
-    ? scrolled
-      ? "hover:text-primary"
-      : "hover:text-accent"
-    : "hover:text-primary";
+  const hoverColor = "hover:text-primary";
 
   return (
     <>
@@ -87,7 +75,7 @@ export default function Navbar() {
               <span className={`font-nav font-bold text-sm lg:text-base leading-tight tracking-wider transition-colors duration-300 ${textColor}`}>
                 LATHER HIGH SCHOOL
               </span>
-              <span className={`font-body text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 ${isHome && !scrolled ? "text-white/70" : "text-gray-500"}`}>
+              <span className="font-body text-[10px] uppercase tracking-[0.2em] text-gray-500">
                 Karnal • UKG to 12th Class
               </span>
             </div>
@@ -115,17 +103,13 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               href="/admin/login"
-              className={`flex items-center gap-1.5 font-nav text-xs font-semibold uppercase tracking-wider py-2 px-3.5 rounded-full transition-all duration-300 border ${
-                isHome && !scrolled
-                  ? "border-white/20 text-white hover:bg-white/10"
-                  : "border-gray-200 text-gray-700 hover:bg-gray-50"
-              }`}
+              className="flex items-center gap-1.5 font-nav text-xs font-semibold uppercase tracking-wider py-2 px-3.5 rounded-full transition-all duration-300 border border-gray-200 text-gray-700 hover:bg-gray-50"
             >
               <User className="w-3.5 h-3.5" />
               Portal
             </Link>
             <Link
-              href="/payment"
+              href="/admission"
               className="font-nav text-xs font-semibold uppercase tracking-wider bg-primary hover:bg-primary/90 text-white py-2 px-5 rounded-full shadow-lg shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5"
             >
               Admissions
@@ -195,7 +179,7 @@ export default function Navbar() {
                   Admin Login
                 </Link>
                 <Link
-                  href="/payment"
+                  href="/admission"
                   className="flex items-center justify-center gap-2 font-nav text-sm font-semibold uppercase tracking-wider py-3 bg-primary hover:bg-primary/95 text-white rounded-xl shadow-lg shadow-primary/20 transition-all"
                 >
                   Admissions Open
