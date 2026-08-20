@@ -77,25 +77,25 @@ export default function Footer() {
           <h4 className="font-heading text-lg font-bold text-white mb-6 border-l-2 border-[#C62828] pl-3">Quick Links</h4>
           <ul className="flex flex-col gap-3.5 text-sm font-light">
             <li>
-              <Link href="/about" className="hover:text-[#F59E0B] transition-colors duration-300">Our History & Legacy</Link>
+              <Link href="/" className="hover:text-[#F59E0B] transition-colors duration-300">Home</Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:text-[#F59E0B] transition-colors duration-300">About Us</Link>
             </li>
             <li>
               <Link href="/staff" className="hover:text-[#F59E0B] transition-colors duration-300">Our Staff</Link>
             </li>
             <li>
-              <Link href="/admission" className="hover:text-[#F59E0B] transition-colors duration-300">Online Admission Form</Link>
+              <Link href="/admission" className="hover:text-[#F59E0B] transition-colors duration-300">Admissions</Link>
             </li>
             <li>
-              <Link href="/faq" className="hover:text-[#F59E0B] transition-colors duration-300">Frequently Asked Questions</Link>
+              <Link href="/donation" className="hover:text-[#F59E0B] transition-colors duration-300">Donate</Link>
             </li>
             <li>
-              <Link href="/donation" className="hover:text-[#F59E0B] transition-colors duration-300">Support & Donations</Link>
+              <Link href="/faq" className="hover:text-[#F59E0B] transition-colors duration-300">FAQ</Link>
             </li>
             <li>
-              <Link href="/blog" className="hover:text-[#F59E0B] transition-colors duration-300">School News & Blog</Link>
-            </li>
-            <li>
-              <Link href="/admin/login" className="hover:text-[#F59E0B] transition-colors duration-300">CMS Staff Portal</Link>
+              <Link href="/blog" className="hover:text-[#F59E0B] transition-colors duration-300">Blog</Link>
             </li>
           </ul>
         </div>
