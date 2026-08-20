@@ -93,6 +93,9 @@ export default function Footer() {
               <Link href="/staff" className="hover:text-[#F59E0B] transition-colors duration-300">Our Staff</Link>
             </li>
             <li>
+              <Link href="/gallery" className="hover:text-[#F59E0B] transition-colors duration-300">Gallery</Link>
+            </li>
+            <li>
               <Link href="/admission" className="hover:text-[#F59E0B] transition-colors duration-300">Admissions</Link>
             </li>
             <li>

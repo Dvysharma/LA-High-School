@@ -423,6 +423,14 @@ export default function HomePage() {
               <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Visual Narrative</span>
               <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-2">Campus Highlights</h2>
             </div>
+            <div>
+              <Link 
+                href="/gallery" 
+                className="inline-flex items-center gap-2 font-nav text-xs font-bold uppercase tracking-wider text-primary border-b-2 border-primary/20 hover:border-primary pb-1 transition-all duration-300"
+              >
+                Explore Full Gallery &rarr;
+              </Link>
+            </div>
           </div>
 
           {/* Grid Layout */}

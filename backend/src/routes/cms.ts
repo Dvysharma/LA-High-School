@@ -272,6 +272,21 @@ router.delete('/gallery/:id', authenticateToken, async (req: Request, res: Respo
   }
 });
 
+// PUT /api/cms/gallery/:id (Auth)
+router.put('/gallery/:id', authenticateToken, async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { type, url, category, orderIndex } = req.body;
+    const updated = await prisma.gallery.update({
+      where: { id },
+      data: { type, url, category, orderIndex },
+    });
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating gallery item' });
+  }
+});
+
 // --- BLOG CRUD ROUTES ---
 // GET /api/cms/blog (Public)
 router.get('/blog', async (req: Request, res: Response) => {

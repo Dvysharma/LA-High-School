@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { 
-  LogOut, Users, FileText, Newspaper, Trash2, Edit, Plus, Upload, Check, AlertCircle, Eye, EyeOff 
+  LogOut, Users, FileText, Newspaper, Trash2, Edit, Plus, Upload, Check, AlertCircle, Eye, EyeOff, Camera
 } from "lucide-react";
 import { API_BASE_URL } from "@/utils/api";
 
-type TabType = "blog" | "faculty" | "news";
+type TabType = "blog" | "faculty" | "news" | "gallery";
 
 export default function AdminDashboardPage() {
   const router = useRouter();
@@ -20,6 +20,7 @@ export default function AdminDashboardPage() {
   const [faculties, setFaculties] = useState<any[]>([]);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [newsList, setNewsList] = useState<any[]>([]);
+  const [gallery, setGallery] = useState<any[]>([]);
 
   // --- Edit Form States (CRUD) ---
   const [editingFaculty, setEditingFaculty] = useState<any | null>(null);
@@ -46,15 +47,17 @@ export default function AdminDashboardPage() {
   const loadAllCmsData = async (authToken: string) => {
     try {
       setLoading(true);
-      const [facRes, blogRes, newsRes] = await Promise.all([
+      const [facRes, blogRes, newsRes, galleryRes] = await Promise.all([
         fetch(`${API_BASE_URL}/cms/faculty`).then(res => res.json()),
         fetch(`${API_BASE_URL}/cms/blog`).then(res => res.json()),
         fetch(`${API_BASE_URL}/cms/news`).then(res => res.json()),
+        fetch(`${API_BASE_URL}/cms/gallery`).then(res => res.json()),
       ]);
 
       if (Array.isArray(facRes)) setFaculties(facRes);
       if (Array.isArray(blogRes)) setBlogs(blogRes);
       if (Array.isArray(newsRes)) setNewsList(newsRes);
+      if (Array.isArray(galleryRes)) setGallery(galleryRes);
 
     } catch (err) {
       console.error(err);
@@ -245,6 +248,68 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // --- GALLERY HANDLERS ---
+  const handleUpdateGalleryCategory = async (id: number, newCategory: string) => {
+    try {
+      const item = gallery.find(g => g.id === id);
+      if (!item) return;
+
+      const res = await fetch(`${API_BASE_URL}/cms/gallery/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ...item, category: newCategory }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error("Error updating gallery category.");
+      setGallery(gallery.map(g => g.id === id ? data : g));
+      triggerStatus("Category updated successfully.");
+    } catch (err: any) {
+      triggerStatus(err.message, true);
+    }
+  };
+
+  const handleDeleteGallery = async (id: number) => {
+    if (!confirm("Are you sure you want to remove this photo from the gallery?")) return;
+    try {
+      const res = await fetch(`${API_BASE_URL}/cms/gallery/${id}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Failed to delete.");
+      setGallery(gallery.filter(g => g.id !== id));
+      triggerStatus("Gallery photo removed.");
+    } catch (err: any) {
+      triggerStatus(err.message, true);
+    }
+  };
+
+  const handleAddGalleryImage = async (url: string) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/cms/gallery`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          type: "image",
+          url,
+          category: "Campus",
+          orderIndex: gallery.length + 1
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error("Error saving gallery item.");
+      setGallery([...gallery, data]);
+      triggerStatus("New image added to gallery.");
+    } catch (err: any) {
+      triggerStatus(err.message, true);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-bg-light flex flex-col justify-center items-center">
@@ -304,6 +369,16 @@ export default function AdminDashboardPage() {
           >
             <Newspaper className="w-4 h-4" />
             Campus News
+          </button>
+
+          <button
+            onClick={() => setActiveTab("gallery")}
+            className={`w-full text-left py-3 px-4 rounded-xl flex items-center gap-3 transition-colors cursor-pointer ${
+              activeTab === "gallery" ? "bg-primary text-white" : "text-white/60 hover:bg-white/5"
+            }`}
+          >
+            <Camera className="w-4 h-4" />
+            Gallery Manager
           </button>
 
         </nav>
@@ -849,6 +924,69 @@ export default function AdminDashboardPage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* --- GALLERY CMS TAB --- */}
+        {activeTab === "gallery" && (
+          <div className="flex flex-col gap-8">
+            <div className="bg-white border border-gray-100 p-8 rounded-3xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="font-heading text-2xl font-bold text-gray-900">Gallery Asset Manager</h1>
+                <p className="font-body text-xs text-gray-400 mt-1">Upload new images, update photo categories, or delete outdated assets.</p>
+              </div>
+              <div className="relative">
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="gallery-image-uploader"
+                  className="hidden"
+                  onChange={(e) => handleFileUpload(e, handleAddGalleryImage)}
+                />
+                <label htmlFor="gallery-image-uploader" className="font-nav text-xs font-bold uppercase tracking-wider bg-primary hover:bg-primary/95 text-white py-3.5 px-6 rounded-xl flex items-center gap-1.5 cursor-pointer shadow-md">
+                  <Plus className="w-4 h-4" />
+                  Upload Photo
+                </label>
+              </div>
+            </div>
+
+            {/* Gallery Grid */}
+            <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
+              <div className="text-xs text-gray-400 mb-6 font-body font-light">
+                Total {gallery.length} images found in database. Change selection in the dropdown to reclassify.
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {gallery.map((item) => (
+                  <div key={item.id} className="border border-gray-100 rounded-2xl p-4 bg-bg-light/30 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="h-40 rounded-xl overflow-hidden bg-gray-100 relative group">
+                      <img src={item.url} alt="" className="w-full h-full object-cover" />
+                      <button
+                        onClick={() => handleDeleteGallery(item.id)}
+                        className="absolute top-3 right-3 bg-red-600 hover:bg-red-750 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md cursor-pointer"
+                        title="Remove Photo"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                    
+                    <div className="flex flex-col gap-1.5">
+                      <label className="font-nav text-[10px] font-bold uppercase tracking-wider text-gray-400">Classify Category</label>
+                      <select
+                        value={item.category}
+                        onChange={(e) => handleUpdateGalleryCategory(item.id, e.target.value)}
+                        className="border border-gray-200 rounded-lg px-3 py-2 bg-white outline-none cursor-pointer text-xs font-body text-gray-700 focus:border-primary"
+                      >
+                        <option value="Campus">Campus</option>
+                        <option value="Labs">Labs</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Events">Events</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
