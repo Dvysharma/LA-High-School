@@ -5,7 +5,7 @@ import { getGallery, GalleryItem } from "@/utils/api";
 import { X, ChevronLeft, ChevronRight, ImageIcon, Loader2, Sparkles } from "lucide-react";
 
 // Fallback images in case the API backend is not running/accessible
-const fallbackGallery: GalleryItem[] = Array.from({ length: 16 }, (_, i) => ({
+const fallbackGallery: GalleryItem[] = Array.from({ length: 76 }, (_, i) => ({
   id: -(i + 1),
   type: "image",
   url: `/gallery/gallery-image-${i + 1}.jpeg`,
