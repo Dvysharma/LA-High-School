@@ -1,14 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { FaFacebook, FaInstagram, FaYoutube, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
+  const pathname = usePathname();
+
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Thank you for subscribing to our newsletter!");
   };
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <footer className="bg-[#172554] text-white/80 font-body border-t border-[#263E9F]/20">

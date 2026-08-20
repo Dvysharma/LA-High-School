@@ -44,6 +44,10 @@ export default function Navbar() {
     setIsOpen(false);
   }, [pathname]);
 
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   const navbarBg = "bg-white/95 backdrop-blur-md shadow-md py-4 border-b border-gray-100";
 
   const textColor = "text-gray-800";
