@@ -215,7 +215,7 @@ export default function BlogPage() {
                     Our admissions for academic cycle 2026-27 are currently open. Submit an online application form or visit our campus.
                   </p>
                   <Link 
-                    href="/payment"
+                    href="/admission"
                     className="font-nav text-[10px] font-bold uppercase tracking-widest bg-accent hover:bg-accent/95 text-white py-3 px-6 rounded-xl inline-block shadow-md"
                   >
                     Admissions Form
