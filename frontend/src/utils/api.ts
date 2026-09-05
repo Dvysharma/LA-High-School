@@ -22,7 +22,8 @@ export interface HomepageData {
   hero: {
     tagline: string;
     subtitle: string;
-    videoUrl: string;
+    imageUrl?: string;
+    videoUrl?: string;
     ctaPrimary: string;
     ctaSecondary: string;
   };

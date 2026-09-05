@@ -14,7 +14,7 @@ const fallbackHome: HomepageData = {
   hero: {
     tagline: "Empowering Minds, Shaping Futures",
     subtitle: "Welcome to Lather High School, Karnal A distinguished institution offering education from UKG to Class 12. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-group-of-students-walking-in-a-university-campus-34384-large.mp4",
+    imageUrl: "/images/school-photo.jpg",
     ctaPrimary: "Admissions open 2026-27",
     ctaSecondary: "Explore Campus"
   },
@@ -95,36 +95,45 @@ export default function HomePage() {
     <div className="relative w-full">
       
       {/* 1. HERO SECTION */}
-      <section className="relative h-[95vh] w-full flex flex-col justify-center pt-24 items-center overflow-hidden bg-black">
-        {/* Background Cinematic Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none"
-          src={homeData.hero.videoUrl}
-        />
-        {/* Overlay Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/40 z-10" />
+      <section className="relative min-h-[92vh] sm:h-[95vh] w-full flex flex-col justify-center pt-28 pb-16 items-center overflow-hidden bg-slate-900">
+        {/* Background School Campus Photo with cinematic gentle scale */}
+        <motion.div 
+          className="absolute inset-0 w-full h-full"
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+        >
+          <img
+            src={homeData.hero.imageUrl || "/images/school-photo.jpg"}
+            alt="Lather High School Campus Building"
+            className="w-full h-full object-cover object-center"
+          />
+        </motion.div>
+
+        {/* Rich atmospheric overlays: reveals the school photo vividly while ensuring pristine readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-slate-950/70 z-10" />
+        <div className="absolute inset-0 bg-secondary/25 mix-blend-multiply z-10" />
 
         {/* Content Box */}
         <div className="relative z-20 max-w-5xl mx-auto px-6 text-center text-white flex flex-col items-center">
           
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="mb-8"
+            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-6 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/25 shadow-2xl"
           >
-            <img src="/schoollogo.png" alt="School Logo" className="h-24 w-auto mx-auto drop-shadow-2xl bg-white/10 rounded-full p-2" />
+            <img src="/schoollogo.png" alt="School Logo" className="h-8 w-auto drop-shadow-md" />
+            <span className="font-nav text-xs font-semibold tracking-wider text-white uppercase">
+              Lather High School • Karnal
+            </span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 drop-shadow-md leading-none"
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 drop-shadow-xl leading-tight"
           >
             {homeData.hero.tagline}
           </motion.h1>
@@ -132,8 +141,8 @@ export default function HomePage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="font-body text-base sm:text-lg lg:text-xl text-white/80 max-w-3xl mb-10 leading-relaxed font-light"
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="font-body text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mb-10 leading-relaxed font-normal drop-shadow-md"
           >
             {homeData.hero.subtitle}
           </motion.p>
@@ -141,18 +150,18 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4"
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
           >
             <Link
               href="/admission"
-              className="font-nav bg-primary hover:bg-primary/95 text-white py-3.5 px-8 rounded-full text-sm font-semibold uppercase tracking-wider shadow-lg shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
+              className="font-nav bg-primary hover:bg-primary/90 text-white py-3.5 px-8 rounded-full text-sm font-semibold uppercase tracking-wider shadow-xl shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/50 text-center"
             >
               {homeData.hero.ctaPrimary}
             </Link>
             <Link
               href="/about"
-              className="font-nav bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3.5 px-8 rounded-full text-sm font-semibold uppercase tracking-wider backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5"
+              className="font-nav bg-white/20 hover:bg-white/30 text-white border border-white/35 py-3.5 px-8 rounded-full text-sm font-semibold uppercase tracking-wider backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 shadow-lg text-center"
             >
               {homeData.hero.ctaSecondary}
             </Link>
@@ -161,9 +170,9 @@ export default function HomePage() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 opacity-60">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-white font-semibold">Scroll</span>
-          <div className="w-[1.5px] h-10 bg-white/30 rounded relative overflow-hidden">
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 opacity-80">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-white font-semibold drop-shadow">Scroll</span>
+          <div className="w-[1.5px] h-10 bg-white/40 rounded relative overflow-hidden">
             <motion.div
               animate={{ y: ["-100%", "100%"] }}
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}

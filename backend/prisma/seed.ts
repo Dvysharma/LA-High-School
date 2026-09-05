@@ -35,7 +35,7 @@ async function main() {
     hero: {
       tagline: 'Empowering Minds, Shaping Futures',
       subtitle: 'Welcome to Lather High School, Karnal A distinguished institution offering education from UKG to Class 12. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-group-of-students-walking-in-a-university-campus-34384-large.mp4', // Premium educational royalty-free video
+      imageUrl: '/images/school-photo.jpg',
       ctaPrimary: 'Admissions open 2026-27',
       ctaSecondary: 'Explore Campus'
     },
