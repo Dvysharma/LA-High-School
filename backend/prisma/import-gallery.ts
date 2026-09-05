@@ -49,7 +49,36 @@ async function main() {
   console.log('Clearing existing database records in Gallery...');
   await prisma.gallery.deleteMany({});
 
-  // Process files
+  // 1. First seed the curated, accurately labeled images
+  const curatedItems = [
+    { category: 'Campus', url: '/images/school-campus.jpg', orderIndex: 1 },
+    { category: 'Labs', url: '/images/computer-lab.jpg', orderIndex: 2 },
+    { category: 'Sports', url: '/images/physical-exercise.jpg', orderIndex: 3 },
+    { category: 'Events', url: '/images/dance-competition.jpg', orderIndex: 4 },
+    { category: 'Campus', url: '/images/classroom.jpg', orderIndex: 5 },
+    { category: 'Campus', url: '/images/library.jpg', orderIndex: 6 },
+    { category: 'Sports', url: '/images/students-playing.jpg', orderIndex: 7 },
+    { category: 'Events', url: '/images/award.jpg', orderIndex: 8 },
+    { category: 'Events', url: '/images/art.jpg', orderIndex: 9 },
+    { category: 'Events', url: '/images/dance.jpg', orderIndex: 10 },
+    { category: 'Events', url: '/images/competition.jpg', orderIndex: 11 },
+    { category: 'Campus', url: '/images/prayer.jpg', orderIndex: 12 },
+    { category: 'Campus', url: '/images/teacher-teaching.jpg', orderIndex: 13 }
+  ];
+
+  for (const item of curatedItems) {
+    await prisma.gallery.create({
+      data: {
+        type: 'image',
+        url: item.url,
+        category: item.category,
+        orderIndex: item.orderIndex
+      }
+    });
+  }
+  console.log(`Seeded ${curatedItems.length} curated labeled gallery items.`);
+
+  // 2. Process and copy files from Gallery folder
   let successCount = 0;
   for (let i = 0; i < imageFiles.length; i++) {
     const originalFile = imageFiles[i];
@@ -64,7 +93,7 @@ async function main() {
       fs.copyFileSync(srcPath, destPath);
 
       // Create DB record
-      const category = categories[i % categories.length];
+      const category = 'Campus'; // Default to campus/activities for general collection
       const url = `/gallery/${cleanFileName}`;
       
       await prisma.gallery.create({
@@ -72,20 +101,20 @@ async function main() {
           type: 'image',
           url: url,
           category: category,
-          orderIndex: i + 1
+          orderIndex: curatedItems.length + i + 1
         }
       });
 
       successCount++;
-      if (successCount % 10 === 0 || successCount === imageFiles.length) {
-        console.log(`Successfully processed and seeded ${successCount}/${imageFiles.length} images.`);
+      if (successCount % 20 === 0 || successCount === imageFiles.length) {
+        console.log(`Successfully processed and seeded ${successCount}/${imageFiles.length} gallery images.`);
       }
     } catch (error) {
       console.error(`Error processing image file "${originalFile}":`, error);
     }
   }
 
-  console.log(`Gallery import and seeding complete! Total: ${successCount} images.`);
+  console.log(`Gallery import and seeding complete! Total: ${curatedItems.length + successCount} images.`);
 }
 
 main()

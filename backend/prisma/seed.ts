@@ -42,7 +42,7 @@ async function main() {
     welcome: {
       title: 'Principal\'s Welcome Message',
       text: 'At Lather High School, Karnal, we believe that education is about more than academic achievement. It is about nurturing curiosity, confidence, discipline, and strong values in every student.\n\nWe strive to provide a supportive environment where students can learn, grow, explore their talents, and develop into well-rounded individuals.\n\nOur goal is to prepare every child for a bright future with knowledge, character, and a sense of responsibility towards society.',
-      image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=800',
+      image: '/images/director.jpg',
       principalName: 'Dr. Anuradha Sharma',
       principalTitle: 'Principal, Lather High School'
     },
@@ -113,17 +113,17 @@ async function main() {
       {
         title: 'Smart Classrooms',
         description: 'Interactive touch panels, ergonomic seating, and individual smart devices integration.',
-        image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=800'
+        image: '/images/classroom.jpg'
       },
       {
         title: 'Research-Grade Labs',
         description: 'Fully equipped Physics, Chemistry, Biology, and computer sciences centers.',
-        image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800'
+        image: '/images/computer-lab.jpg'
       },
       {
         title: 'Elite Library',
         description: 'A repository of over 20,000 physical books, digital catalogs, and international journals.',
-        image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=800'
+        image: '/images/library.jpg'
       }
     ]
   };
@@ -206,10 +206,10 @@ async function main() {
 
   // Seed Gallery
   const galleryData = [
-    { type: 'image', category: 'Campus', url: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=800', orderIndex: 1 },
-    { type: 'image', category: 'Labs', url: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=800', orderIndex: 2 },
-    { type: 'image', category: 'Sports', url: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&q=80&w=800', orderIndex: 3 },
-    { type: 'image', category: 'Events', url: 'https://images.unsplash.com/photo-1460518451285-cd7afbc11b0b?auto=format&fit=crop&q=80&w=800', orderIndex: 4 }
+    { type: 'image', category: 'Campus', url: '/images/school-campus.jpg', orderIndex: 1 },
+    { type: 'image', category: 'Labs', url: '/images/computer-lab.jpg', orderIndex: 2 },
+    { type: 'image', category: 'Sports', url: '/images/students-playing.jpg', orderIndex: 3 },
+    { type: 'image', category: 'Events', url: '/images/dance-competition.jpg', orderIndex: 4 }
   ];
 
   for (const item of galleryData) {
@@ -223,7 +223,7 @@ async function main() {
       slug: 'role-of-ai-robotics-modern-education',
       content: '<p>Artificial Intelligence (AI) and robotics are no longer concepts confined to sci-fi novels. In today\'s pedagogical landscape, they play an essential role in training student minds to think computationally. At Lather High School, our advanced lab features automated robotic arms and IoT boards that let students code and build active solutions to real-world problems. Discover how this hands-on engineering is shaping future engineers.</p>',
       category: 'Technology',
-      featuredImage: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800',
+      featuredImage: '/images/computer-lab.jpg',
       draft: false,
       publishedAt: new Date()
     },
@@ -232,7 +232,7 @@ async function main() {
       slug: 'fostering-culture-of-reading-literary-program',
       content: '<p>In an age dominated by screens and prompt reels, deep-focus reading has become an endangered skill. Our library program at Lather High School challenges this trend. By scheduling dedicated reading hours and engaging students in literary debate, we help them develop strong analytical vocabulary and deep empathy. Read on to find out how our English faculty helps students love literature.</p>',
       category: 'Academics',
-      featuredImage: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&q=80&w=800',
+      featuredImage: '/images/library.jpg',
       draft: false,
       publishedAt: new Date()
     }
@@ -253,8 +253,8 @@ async function main() {
   }
 
   const newsData = [
-    { title: 'Lather High School Tops District CBSE Ranks', date: '2026-06-02', content: 'Our senior secondary students secured 100% pass percentages with 35 students scoring above 95% in CBSE boards.', imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800' },
-    { title: 'Students Win National Robotics Olympiad', date: '2026-07-20', content: 'The LA Robotics club secured the gold trophy in the Junior Autonomous Vehicle division in Delhi.', imageUrl: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&q=80&w=800' }
+    { title: 'Lather High School Tops District CBSE Ranks', date: '2026-06-02', content: 'Our senior secondary students secured 100% pass percentages with 35 students scoring above 95% in CBSE boards.', imageUrl: '/images/award.jpg' },
+    { title: 'Students Win National Robotics Olympiad', date: '2026-07-20', content: 'The LA Robotics club secured the gold trophy in the Junior Autonomous Vehicle division in Delhi.', imageUrl: '/images/competition.jpg' }
   ];
 
   for (const news of newsData) {
@@ -312,7 +312,7 @@ async function main() {
     metaTitle: 'Lather High School | Best School in Karnal, Haryana',
     metaDescription: 'Lather High School, Karnal - A prestigious CBSE educational institution offering elite academic standards, world-class athletic facilities, and holistic student-centric leadership coaching.',
     metaKeywords: 'Lather High School, Karnal School, Best CBSE School Karnal, Elite School Haryana, Top Residential School Karnal',
-    openGraphImg: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1200'
+    openGraphImg: '/images/school-campus.jpg'
   };
 
   await prisma.pageContent.upsert({

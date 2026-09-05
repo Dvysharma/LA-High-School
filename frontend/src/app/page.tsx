@@ -21,7 +21,7 @@ const fallbackHome: HomepageData = {
   welcome: {
     title: "Principal's Welcome Message",
     text: "At Lather High School, Karnal, we believe that education is about more than academic achievement. It is about nurturing curiosity, confidence, discipline, and strong values in every student.\n\nWe strive to provide a supportive environment where students can learn, grow, explore their talents, and develop into well-rounded individuals.\n\nOur goal is to prepare every child for a bright future with knowledge, character, and a sense of responsibility towards society.",
-    image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=800",
+    image: "/images/director.jpg",
     principalName: "Dr. Anuradha Sharma",
     principalTitle: "Principal, Lather High School"
   },
@@ -47,15 +47,15 @@ const fallbackEvents: SchoolEvent[] = [
 ];
 
 const fallbackNews: SchoolNews[] = [
-  { id: 1, title: "Lather High School Tops District CBSE Ranks", date: "2026-06-02", content: "Our senior secondary students secured 100% pass percentages with 35 students scoring above 95% in CBSE boards.", imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800" },
-  { id: 2, title: "Students Win National Robotics Olympiad", date: "2026-07-20", content: "The Lather High School Robotics club secured the gold trophy in the Junior Autonomous Vehicle division in Delhi.", imageUrl: "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&q=80&w=800" }
+  { id: 1, title: "Lather High School Tops District CBSE Ranks", date: "2026-06-02", content: "Our senior secondary students secured 100% pass percentages with 35 students scoring above 95% in CBSE boards.", imageUrl: "/images/award.jpg" },
+  { id: 2, title: "Students Win National Robotics Olympiad", date: "2026-07-20", content: "The Lather High School Robotics club secured the gold trophy in the Junior Autonomous Vehicle division in Delhi.", imageUrl: "/images/competition.jpg" }
 ];
 
 const fallbackGallery: GalleryItem[] = [
-  { id: 1, type: "image", category: "Campus", url: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=800", orderIndex: 1 },
-  { id: 2, type: "image", category: "Labs", url: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=800", orderIndex: 2 },
-  { id: 3, type: "image", category: "Sports", url: "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&q=80&w=800", orderIndex: 3 },
-  { id: 4, type: "image", category: "Events", url: "https://images.unsplash.com/photo-1460518451285-cd7afbc11b0b?auto=format&fit=crop&q=80&w=800", orderIndex: 4 }
+  { id: 1, type: "image", category: "Campus", url: "/images/school-campus.jpg", orderIndex: 1 },
+  { id: 2, type: "image", category: "Labs", url: "/images/computer-lab.jpg", orderIndex: 2 },
+  { id: 3, type: "image", category: "Sports", url: "/images/physical-exercise.jpg", orderIndex: 3 },
+  { id: 4, type: "image", category: "Events", url: "/images/dance-competition.jpg", orderIndex: 4 }
 ];
 
 const iconMap: Record<string, any> = {
@@ -294,8 +294,8 @@ export default function HomePage() {
             >
               <div className="h-80 relative overflow-hidden bg-gray-100">
                 <img 
-                  src="/prayer.png" 
-                  alt="Students Doing Morning Prayer" 
+                  src="/images/prayer.jpg" 
+                  alt="Students in Morning Prayer Assembly" 
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
               </div>
@@ -317,8 +317,8 @@ export default function HomePage() {
             >
               <div className="h-80 relative overflow-hidden bg-gray-100">
                 <img 
-                  src="/study.png" 
-                  alt="Students Studying in Library" 
+                  src="/images/teacher-teaching.jpg" 
+                  alt="Teacher Teaching Students in Classroom" 
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
               </div>
@@ -435,23 +435,36 @@ export default function HomePage() {
 
           {/* Grid Layout */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {gallery.slice(0, 4).map((item) => (
-              <div 
-                key={item.id} 
-                className="group relative h-72 rounded-2xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer hover-zoom-container"
-                onClick={() => setActivePhoto(item.url)}
-              >
-                <img 
-                  src={item.url} 
-                  alt={item.category} 
-                  className="absolute inset-0 w-full h-full object-cover hover-zoom-img"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6" />
-                <span className="absolute bottom-6 left-6 z-10 font-nav text-xs font-bold uppercase tracking-widest text-white translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  {item.category}
-                </span>
-              </div>
-            ))}
+            {['Campus', 'Labs', 'Sports', 'Events'].map((categoryName) => {
+              const matchedItem = gallery.find((g) => g.category?.toLowerCase() === categoryName.toLowerCase()) || 
+                                  fallbackGallery.find((f) => f.category?.toLowerCase() === categoryName.toLowerCase()) ||
+                                  fallbackGallery[0];
+              return (
+                <div 
+                  key={categoryName} 
+                  className="group relative h-72 rounded-2xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer hover-zoom-container bg-gray-100"
+                  onClick={() => setActivePhoto(matchedItem.url)}
+                >
+                  <img 
+                    src={matchedItem.url} 
+                    alt={matchedItem.category} 
+                    className="absolute inset-0 w-full h-full object-cover hover-zoom-img"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300 flex items-end p-6" />
+                  <div className="absolute bottom-5 left-5 right-5 z-10">
+                    <span className="inline-block px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-md font-nav text-[10px] font-bold uppercase tracking-widest text-white mb-1 shadow-sm">
+                      {categoryName}
+                    </span>
+                    <h3 className="font-heading text-lg font-bold text-white drop-shadow-sm leading-tight">
+                      {categoryName === 'Campus' ? 'Campus & Building' :
+                       categoryName === 'Labs' ? 'Computer & Tech Lab' :
+                       categoryName === 'Sports' ? 'Athletics & Training' :
+                       'Events & Celebrations'}
+                    </h3>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
         </div>

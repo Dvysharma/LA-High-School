@@ -19,9 +19,9 @@ const fallbackAbout: AboutpageData = {
     { year: '2026', event: 'Celebrating 41 years of educational excellence.' }
   ],
   infrastructure: [
-    { title: 'Smart Classrooms', description: 'Interactive touch panels, ergonomic seating, and individual smart devices integration.', image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=800' },
-    { title: 'Research-Grade Labs', description: 'Fully equipped Physics, Chemistry, Biology, and computer sciences centers.', image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800' },
-    { title: 'Elite Library', description: 'A repository of over 20,000 physical books, digital catalogs, and international journals.', image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=800' }
+    { title: 'Smart Classrooms', description: 'Interactive touch panels, ergonomic seating, and individual smart devices integration.', image: '/images/classroom.jpg' },
+    { title: 'Research-Grade Labs', description: 'Fully equipped Physics, Chemistry, Biology, and computer sciences centers.', image: '/images/computer-lab.jpg' },
+    { title: 'Elite Library', description: 'A repository of over 20,000 physical books, digital catalogs, and international journals.', image: '/images/library.jpg' }
   ]
 };
 
