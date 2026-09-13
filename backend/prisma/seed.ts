@@ -34,16 +34,16 @@ async function main() {
   const homeContent = {
     hero: {
       tagline: 'Empowering Minds, Shaping Futures',
-      subtitle: 'Welcome to Lather High School, Karnal A distinguished institution offering education from UKG to Class 12. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.',
+      subtitle: 'Welcome to Lather High School, Karnal\nA distinguished institution offering education from UKG to Class 12. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.',
       imageUrl: '/images/school-photo.jpg',
       ctaPrimary: 'Admissions open 2026-27',
       ctaSecondary: 'Explore Campus'
     },
     welcome: {
-      title: 'Principal\'s Welcome Message',
+      title: 'Welcome Message',
       text: 'At Lather High School, Karnal, we believe that education is about more than academic achievement. It is about nurturing curiosity, confidence, discipline, and strong values in every student.\n\nWe strive to provide a supportive environment where students can learn, grow, explore their talents, and develop into well-rounded individuals.\n\nOur goal is to prepare every child for a bright future with knowledge, character, and a sense of responsibility towards society.',
       image: '/images/director.jpg',
-      principalName: 'Dr. Anuradha Sharma',
+      principalName: 'Ms. Poonam Lather',
       principalTitle: 'Principal, Lather High School'
     },
     whyChooseUs: [
@@ -73,9 +73,9 @@ async function main() {
         icon: 'Sparkles'
       },
       {
-        title: 'Holistic Development',
-        description: 'We focus on the overall development of every child — nurturing knowledge, creativity, confidence, character, and social responsibility.',
-        icon: 'Cpu'
+        title: 'Opportunity for Every Child',
+        description: 'We believe that a child’s potential should never be limited by financial circumstances. Our vision is to create a nurturing and inclusive environment where children from diverse backgrounds can learn, grow, and build a brighter future.',
+        icon: 'Heart'
       }
     ],
     stats: {
@@ -99,7 +99,7 @@ async function main() {
   const aboutContent = {
     history: 'Lather High School was founded in 1985 with a visionary spirit to establish a premier co-educational residential-cum-day school in Karnal, Haryana. Over the last four decades, the school has evolved into an educational powerhouse, setting standards in progressive learning pedagogy, modern labs, and high-performance sports environments.',
     mission: 'To provide a stimulating learning environment that encourages curiosity, critical thinking, creative expression, and moral character. We strive to mold students into confident, responsible, and skilled leaders of tomorrow.',
-    vision: 'To be a globally recognized center of learning where academic rigor, ethical values, and holistic development prepare students to excel in a dynamic and interconnected world.',
+    vision: 'To make quality education accessible to every child, regardless of their financial circumstances. We believe that a child’s dreams and potential should never be limited by their ability to afford education. Our vision is to create an inclusive and nurturing environment where every student has the opportunity to learn, grow, and build a brighter future.',
     philosophy: 'Our academic philosophy, "Learning by Doing," is inspired by the best editorial schools. We combine traditional academic discipline with design thinking, collaborative group problem solving, and technological integration. Every student is mentored to pursue intellectual excellence alongside physical well-being, creative exploration, and social responsibility.',
     timeline: [
       { year: '1985', event: 'Lather High School established in Karnal with 150 students.' },
@@ -292,7 +292,7 @@ async function main() {
   // Seed Contact details
   const contactContent = {
     phone: '+91 94665 18003, +91 81686 53159',
-    email: 'info@latherhigherschool.edu.in, admissions@latherhigherschool.edu.in',
+    email: 'admission@latherhighschool.com, latherhighschoo@gmail.com',
     address: 'Pritam nagar karnal 132001',
     mapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.527390977239!2d76.9740523!3d29.684128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e719c8fba56cf%3A0xe54d8a1fc414589d!2sKarnal%2C%20Haryana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
     officeHours: 'Monday - Saturday: 8:00 AM - 3:00 PM'

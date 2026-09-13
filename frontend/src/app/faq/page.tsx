@@ -10,7 +10,7 @@ export default function FAQPage() {
   const faqs = [
     {
       question: "What are the school timings?",
-      answer: "Lather High School operates from Monday to Saturday, from 8:00 AM to 3:00 PM for all classes (UKG to Class 12)."
+      answer: "Summer timing - 8:00 am to 2:00 Pm\nWinter timing - 8:00 am to 2:30 pm"
     },
     {
       question: "Where is Lather High School located?",
@@ -22,7 +22,7 @@ export default function FAQPage() {
     },
     {
       question: "Is Lather High School affiliated with a board?",
-      answer: "Yes, Lather High School is a premier CBSE-affiliated school offering academic excellence from UKG up to Class 12, focusing on a holistic curriculum and critical computation."
+      answer: "Yes, Lather High School is affiliated with HBSE (Haryana Board of School Education), offering quality education from UKG up to Class 10th with a strong foundation in academic excellence and character building."
     },
     {
       question: "Is the school co-educational?",
@@ -30,7 +30,7 @@ export default function FAQPage() {
     },
     {
       question: "Who should I contact for support or general inquiries?",
-      answer: "You can call our help desk at +91 94665 18003 or +91 81686 53159, or send an email to info@latherhigherschool.edu.in. Office hours are Monday through Saturday, 8:00 AM - 3:00 PM."
+      answer: "You can call our help desk at +91 94665 18003 or +91 81686 53159, or send an email to admission@latherhighschool.com or latherhighschoo@gmail.com. Office hours are Monday through Saturday, Summer: 8:00 AM - 2:00 PM, Winter: 8:00 AM - 2:30 PM."
     },
     {
       question: "Are school fees paid quarterly?",
@@ -86,7 +86,7 @@ export default function FAQPage() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.25, ease: "easeInOut" }}
                       >
-                        <div className="px-6 pb-6 pt-1 border-t border-gray-50 text-sm font-body text-gray-500 leading-relaxed">
+                        <div className="px-6 pb-6 pt-1 border-t border-gray-50 text-sm font-body text-gray-500 leading-relaxed whitespace-pre-line">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -108,11 +108,12 @@ export default function FAQPage() {
             </p>
 
             <div className="flex flex-col gap-4 font-body text-xs text-gray-600">
-              <div className="flex items-center gap-3 bg-bg-light border border-gray-50 p-4 rounded-xl">
-                <Clock className="w-5 h-5 text-primary shrink-0" />
-                <div>
+              <div className="flex items-start gap-3 bg-bg-light border border-gray-50 p-4 rounded-xl">
+                <Clock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-0.5">
                   <span className="text-[9px] text-gray-400 block uppercase tracking-wider font-semibold">Timings</span>
-                  <span className="font-semibold text-gray-800">Mon - Sat: 8:00 AM - 3:00 PM</span>
+                  <span className="font-semibold text-gray-800 text-xs">Summer: 8:00 AM - 2:00 PM</span>
+                  <span className="font-semibold text-gray-800 text-xs">Winter: 8:00 AM - 2:30 PM</span>
                 </div>
               </div>
 
@@ -124,11 +125,12 @@ export default function FAQPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 bg-bg-light border border-gray-50 p-4 rounded-xl">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
-                <div>
+              <div className="flex items-start gap-3 bg-bg-light border border-gray-50 p-4 rounded-xl">
+                <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <div className="flex flex-col">
                   <span className="text-[9px] text-gray-400 block uppercase tracking-wider font-semibold">Email</span>
-                  <span className="font-semibold text-gray-800 break-all">info@latherhigherschool.edu.in</span>
+                  <a href="mailto:admission@latherhighschool.com" className="font-semibold text-gray-800 hover:text-primary break-all">admission@latherhighschool.com</a>
+                  <a href="mailto:latherhighschoo@gmail.com" className="font-semibold text-gray-800 hover:text-primary break-all">latherhighschoo@gmail.com</a>
                 </div>
               </div>
 

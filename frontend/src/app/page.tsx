@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
-  Award, BookOpen, Activity, Cpu, Shield, Sparkles, 
+  Award, BookOpen, Activity, Cpu, Shield, Sparkles, Heart,
   ArrowRight, Calendar, MapPin, ChevronRight, Quote, Plus 
 } from "lucide-react";
 import { getHomepage, getEvents, getNews, getGallery, HomepageData, SchoolEvent, SchoolNews, GalleryItem } from "@/utils/api";
@@ -13,16 +13,16 @@ import { getHomepage, getEvents, getNews, getGallery, HomepageData, SchoolEvent,
 const fallbackHome: HomepageData = {
   hero: {
     tagline: "Empowering Minds, Shaping Futures",
-    subtitle: "Welcome to Lather High School, Karnal A distinguished institution offering education from UKG to Class 12. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.",
+    subtitle: "Welcome to Lather High School, Karnal\nA distinguished institution offering education from UKG to Class 10th. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.",
     imageUrl: "/images/school-photo.jpg",
     ctaPrimary: "Admissions open 2026-27",
     ctaSecondary: "Explore Campus"
   },
   welcome: {
-    title: "Principal's Welcome Message",
+    title: "Welcome Message",
     text: "At Lather High School, Karnal, we believe that education is about more than academic achievement. It is about nurturing curiosity, confidence, discipline, and strong values in every student.\n\nWe strive to provide a supportive environment where students can learn, grow, explore their talents, and develop into well-rounded individuals.\n\nOur goal is to prepare every child for a bright future with knowledge, character, and a sense of responsibility towards society.",
-    image: "/images/director.jpg",
-    principalName: "Dr. Anuradha Sharma",
+    image: "/images/director-principal.jpg",
+    principalName: "Ms. Poonam Lather",
     principalTitle: "Principal, Lather High School"
   },
   whyChooseUs: [
@@ -31,7 +31,7 @@ const fallbackHome: HomepageData = {
     { title: "Values & Discipline", description: "We believe in building strong character through discipline, respect, responsibility, and good values.", icon: "Shield" },
     { title: "Sports & Activities", description: "Encouraging students to participate in sports and co-curricular activities to develop confidence, teamwork, and a healthy spirit.", icon: "Activity" },
     { title: "Supportive Environment", description: "A caring and positive school environment where students feel encouraged to learn, express themselves, and grow.", icon: "Sparkles" },
-    { title: "Holistic Development", description: "We focus on the overall development of every child — nurturing knowledge, creativity, confidence, character, and social responsibility.", icon: "Cpu" }
+    { title: "Opportunity for Every Child", description: "We believe that a child’s potential should never be limited by financial circumstances. Our vision is to create a nurturing and inclusive environment where children from diverse backgrounds can learn, grow, and build a brighter future.", icon: "Heart" }
   ],
   stats: {
     yearsOfExcellence: 41,
@@ -47,7 +47,7 @@ const fallbackEvents: SchoolEvent[] = [
 ];
 
 const fallbackNews: SchoolNews[] = [
-  { id: 1, title: "Lather High School Tops District CBSE Ranks", date: "2026-06-02", content: "Our senior secondary students secured 100% pass percentages with 35 students scoring above 95% in CBSE boards.", imageUrl: "/images/award.jpg" },
+  { id: 1, title: "Lather High School Achieves Outstanding Board Results", date: "2026-06-02", content: "Our students secured 100% pass percentages with exemplary scores in board examinations.", imageUrl: "/images/award.jpg" },
   { id: 2, title: "Students Win National Robotics Olympiad", date: "2026-07-20", content: "The Lather High School Robotics club secured the gold trophy in the Junior Autonomous Vehicle division in Delhi.", imageUrl: "/images/competition.jpg" }
 ];
 
@@ -65,6 +65,7 @@ const iconMap: Record<string, any> = {
   Cpu,
   Shield,
   Sparkles,
+  Heart,
 };
 
 export default function HomePage() {
@@ -91,28 +92,32 @@ export default function HomePage() {
     loadData();
   }, []);
 
+  // Split subtitle nicely if line break exists or format as requested
+  const rawSubtitle = homeData.hero.subtitle || fallbackHome.hero.subtitle;
+  const subtitleLines = rawSubtitle.split("\n");
+
   return (
     <div className="relative w-full">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[92vh] sm:h-[95vh] w-full flex flex-col justify-center pt-28 pb-16 items-center overflow-hidden bg-slate-900">
-        {/* Background School Campus Photo with cinematic gentle scale */}
+      <section className="relative min-h-[92vh] sm:min-h-[95vh] w-full flex flex-col justify-center pt-28 pb-16 items-center overflow-hidden bg-slate-900">
+        {/* Background School Campus Photo with clean fitting and cinematic gentle scale */}
         <motion.div 
           className="absolute inset-0 w-full h-full"
-          initial={{ scale: 1.08 }}
+          initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
         >
           <img
             src={homeData.hero.imageUrl || "/images/school-photo.jpg"}
             alt="Lather High School Campus Building"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center sm:object-[center_35%]"
           />
         </motion.div>
 
         {/* Rich atmospheric overlays: reveals the school photo vividly while ensuring pristine readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-slate-950/70 z-10" />
-        <div className="absolute inset-0 bg-secondary/25 mix-blend-multiply z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-900/55 to-slate-950/75 z-10" />
+        <div className="absolute inset-0 bg-secondary/20 mix-blend-multiply z-10" />
 
         {/* Content Box */}
         <div className="relative z-20 max-w-5xl mx-auto px-6 text-center text-white flex flex-col items-center">
@@ -138,14 +143,25 @@ export default function HomePage() {
             {homeData.hero.tagline}
           </motion.h1>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="font-body text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mb-10 leading-relaxed font-normal drop-shadow-md"
+            className="font-body text-base sm:text-lg lg:text-xl text-white/95 max-w-3xl mb-10 leading-relaxed font-normal drop-shadow-md space-y-2"
           >
-            {homeData.hero.subtitle}
-          </motion.p>
+            {subtitleLines.length > 1 ? (
+              <>
+                <p className="font-semibold text-accent/95 text-lg sm:text-xl lg:text-2xl drop-shadow">
+                  {subtitleLines[0]}
+                </p>
+                <p className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">
+                  {subtitleLines.slice(1).join("\n")}
+                </p>
+              </>
+            ) : (
+              <p className="whitespace-pre-line">{rawSubtitle}</p>
+            )}
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -157,7 +173,7 @@ export default function HomePage() {
               href="/admission"
               className="font-nav bg-primary hover:bg-primary/90 text-white py-3.5 px-8 rounded-full text-sm font-semibold uppercase tracking-wider shadow-xl shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/50 text-center"
             >
-              {homeData.hero.ctaPrimary}
+              {homeData.hero.ctaPrimary || "Admissions open 2026-27"}
             </Link>
             <Link
               href="/about"
@@ -182,10 +198,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. WELCOME / PRINCIPAL MESSAGE */}
+      {/* 2. WELCOME MESSAGE SECTION */}
       <section className="py-24 bg-white px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
+          {/* Combined Leadership Photo: Director Mr. Kanwar Singh Lather & Principal Ms. Poonam Lather */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -193,17 +210,25 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-5 relative"
           >
-            <div className="absolute -inset-4 border border-primary/10 rounded-2xl transform rotate-2 pointer-events-none" />
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover-zoom-container">
-              <img
-                src={homeData.welcome.image}
-                alt="Principal"
-                className="w-full h-[450px] object-cover hover-zoom-img"
-              />
-            </div>
-            <div className="absolute bottom-6 right-6 bg-secondary text-white py-4 px-6 rounded-xl shadow-xl">
-              <p className="font-heading text-lg font-bold text-white leading-tight">{homeData.welcome.principalName}</p>
-              <p className="text-xs text-white/70 mt-1 uppercase tracking-wider">{homeData.welcome.principalTitle}</p>
+            <div className="absolute -inset-4 border border-primary/10 rounded-3xl transform rotate-1 pointer-events-none" />
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white group hover-zoom-container">
+              <div className="h-[480px] sm:h-[520px] w-full overflow-hidden bg-gray-100">
+                <img
+                  src="/images/director-principal.jpg"
+                  alt="Mr. Kanwar Singh Lather (Director) & Ms. Poonam Lather (Principal)"
+                  className="w-full h-full object-cover object-top hover-zoom-img"
+                />
+              </div>
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent p-6 text-white flex flex-col justify-end">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="font-heading text-base sm:text-lg font-bold text-white">Mr. Kanwar Singh Lather</span>
+                  <span className="text-xs bg-primary/90 text-white font-nav font-bold uppercase tracking-wider px-2 py-0.5 rounded">Director</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-heading text-base sm:text-lg font-bold text-white">Ms. Poonam Lather</span>
+                  <span className="text-xs bg-accent text-white font-nav font-bold uppercase tracking-wider px-2 py-0.5 rounded">Principal</span>
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -214,9 +239,8 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-7 flex flex-col gap-6"
           >
-            <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Founders Message</span>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-              {homeData.welcome.title}
+              {homeData.welcome.title || "Welcome Message"}
             </h2>
             <div className="w-16 h-[3px] bg-accent" />
             <p className="font-body text-gray-600 leading-relaxed text-base whitespace-pre-line">
@@ -261,13 +285,13 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1, duration: 0.6 }}
-                  className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+                  className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col"
                 >
                   <div className="w-12 h-12 bg-primary/5 group-hover:bg-primary text-primary group-hover:text-white rounded-xl flex items-center justify-center mb-6 transition-colors duration-300">
                     <IconComp className="w-6 h-6" />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
-                  <p className="font-body text-sm text-gray-500 leading-relaxed">{card.description}</p>
+                  <p className="font-body text-sm text-gray-500 leading-relaxed flex-grow">{card.description}</p>
                 </motion.div>
               );
             })}
@@ -276,7 +300,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEW. SCHOOL CULTURE SECTION */}
+      {/* 4. SCHOOL CULTURE SECTION */}
       <section className="py-24 bg-white px-6 lg:px-8 border-b border-gray-100">
         <div className="max-w-7xl mx-auto">
           
@@ -344,36 +368,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. ACHIEVEMENTS / COUNTERS */}
-      <section className="relative py-20 bg-secondary text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary to-indigo-950 opacity-90 z-10" />
-        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-          
-          <div className="flex flex-col gap-2">
-            <span className="font-heading text-5xl lg:text-6xl font-bold text-accent">{homeData.stats.yearsOfExcellence}+</span>
-            <span className="font-nav text-xs font-semibold uppercase tracking-wider text-white/60">Years of Legacy</span>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <span className="font-heading text-5xl lg:text-6xl font-bold text-accent">{homeData.stats.students}+</span>
-            <span className="font-nav text-xs font-semibold uppercase tracking-wider text-white/60">Enrolled Students</span>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <span className="font-heading text-5xl lg:text-6xl font-bold text-accent">{homeData.stats.teachers}+</span>
-            <span className="font-nav text-xs font-semibold uppercase tracking-wider text-white/60">Expert Faculty</span>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <span className="font-heading text-5xl lg:text-6xl font-bold text-accent">{homeData.stats.awards}+</span>
-            <span className="font-nav text-xs font-semibold uppercase tracking-wider text-white/60">National Awards</span>
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* 6. TESTIMONIAL SLIDER */}
+      {/* 5. REAL CLIENT TESTIMONIALS */}
       <section className="py-24 bg-bg-light px-6 lg:px-8 border-y border-gray-100">
         <div className="max-w-7xl mx-auto">
           
@@ -385,36 +380,39 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative">
+            {/* Testimonial 1: Himanshu Kashyap */}
+            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative hover:shadow-md transition-shadow">
               <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10" />
-              <p className="font-body text-sm text-gray-500 leading-relaxed mb-6 italic">
-                "Our son's transformation at Lather High School has been incredible. The focus on coding, debate, and outdoor sports has built a level of independence and analytical clarity that traditional syllabus schooling could never accomplish. Truly Karnal's premium school!"
+              <p className="font-body text-sm text-gray-600 leading-relaxed mb-6 italic">
+                "Hello everyone, I am Himanshu Kashyap, an alumnus (pass-out student). I would like to share my experience regarding the quality of education here. If you are looking for top-notch study material, excellent guidance, and a great learning environment, Lather Institute is the best place to be. The faculty is extremely supportive, and the teaching methodology helps build a very strong foundation. Highly recommended for every serious student!"
               </p>
-              <div>
-                <h4 className="font-heading text-base font-bold text-gray-900">Dr. Sunita Mehta</h4>
-                <p className="text-xs text-gray-400">Parent of Class XI Student</p>
+              <div className="border-t border-gray-50 pt-4">
+                <h4 className="font-heading text-base font-bold text-gray-900">Himanshu Kashyap</h4>
+                <p className="text-xs text-primary font-semibold font-nav uppercase tracking-wider mt-0.5">Alumnus (Pass-Out Student)</p>
               </div>
             </div>
 
-            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative">
+            {/* Testimonial 2: Suchita Yadav */}
+            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative hover:shadow-md transition-shadow">
               <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10" />
-              <p className="font-body text-sm text-gray-500 leading-relaxed mb-6 italic">
-                "The residential life at Lather High School feels like a cohesive global community. Faculty live on campus and are available to help with advanced math questions or chess strategies even at 8 PM. It has redefined student boarding for me."
+              <p className="font-body text-sm text-gray-600 leading-relaxed mb-6 italic">
+                "Securing 98% marks as a student of Lather High School (Batch 2023-24) is a moment of immense pride for me. I have been able to achieve this milestone only because of the excellent education and supportive teachers here. A heartfelt thank you to Lather High School for the right guidance and best education!"
               </p>
-              <div>
-                <h4 className="font-heading text-base font-bold text-gray-900">Kabir Chauhan</h4>
-                <p className="text-xs text-gray-400">Class XII Student & Sports Captain</p>
+              <div className="border-t border-gray-50 pt-4">
+                <h4 className="font-heading text-base font-bold text-gray-900">Suchita Yadav</h4>
+                <p className="text-xs text-primary font-semibold font-nav uppercase tracking-wider mt-0.5">Student • Batch 2023-24 (98% Board Score)</p>
               </div>
             </div>
 
-            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative">
+            {/* Testimonial 3: Ritu Lather */}
+            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col justify-between relative hover:shadow-md transition-shadow">
               <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10" />
-              <p className="font-body text-sm text-gray-500 leading-relaxed mb-6 italic">
-                "Coming from LA, transition to Google Research was seamless. The school taught me structured programming and academic discipline that set a rock-solid foundation for university and work. Proud of my roots."
+              <p className="font-body text-sm text-gray-600 leading-relaxed mb-6 italic">
+                "Lather High School is where my journey began. The values, discipline, and academic strength I received here became the base of my life. From those classrooms to working internationally today, I carry my school with me in everything I do."
               </p>
-              <div>
-                <h4 className="font-heading text-base font-bold text-gray-900">Aditya Sen</h4>
-                <p className="text-xs text-gray-400">Alumni, Batch of 2012 (Senior Software Engineer, Google)</p>
+              <div className="border-t border-gray-50 pt-4">
+                <h4 className="font-heading text-base font-bold text-gray-900">Ritu Lather</h4>
+                <p className="text-xs text-primary font-semibold font-nav uppercase tracking-wider mt-0.5">Alumna • Working Internationally</p>
               </div>
             </div>
 
@@ -423,7 +421,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. GALLERY PREVIEW */}
+      {/* 6. GALLERY PREVIEW */}
       <section className="py-24 bg-white px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           

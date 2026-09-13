@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Lather High School | Best School in Karnal, Haryana",
-  description: "Lather High School, Karnal - A prestigious CBSE educational institution offering elite academic standards, world-class athletic facilities, and holistic student-centric leadership coaching.",
-  keywords: "Lather High School, Karnal School, Best CBSE School Karnal, Elite School Haryana, Top Residential School Karnal",
+  description: "Lather High School, Karnal - A prestigious HBSE-affiliated educational institution offering education from UKG to Class 10th with a legacy of academic excellence, strong values, and holistic development.",
+  keywords: "Lather High School, Karnal School, Best School Karnal, HBSE School Karnal, Top School Haryana, Lather High School Karnal",
   openGraph: {
     title: "Lather High School, Karnal",
     description: "Empowering Minds, Shaping Futures. Join Karnal's leading school with academic and sports excellence.",

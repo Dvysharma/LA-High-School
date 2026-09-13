@@ -3,20 +3,52 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { 
-  LogOut, Users, FileText, Newspaper, Trash2, Edit, Plus, Upload, Check, AlertCircle, Eye, EyeOff, Camera
+  LogOut, Users, FileText, Newspaper, Trash2, Edit, Plus, Upload, Check, AlertCircle, Eye, EyeOff, Camera, LayoutTemplate, Save
 } from "lucide-react";
-import { API_BASE_URL } from "@/utils/api";
+import { API_BASE_URL, HomepageData } from "@/utils/api";
 
-type TabType = "blog" | "faculty" | "news" | "gallery";
+type TabType = "homepage" | "blog" | "faculty" | "news" | "gallery";
+
+const defaultHomepageData: HomepageData = {
+  hero: {
+    tagline: "Empowering Minds, Shaping Futures",
+    subtitle: "Welcome to Lather High School, Karnal\nA distinguished institution offering education from UKG to Class 10th. With a legacy of academic excellence, strong values, and holistic development, we are committed to nurturing confident, responsible, and well-rounded individuals prepared to shape a brighter future.",
+    imageUrl: "/images/school-photo.jpg",
+    ctaPrimary: "Admissions open 2026-27",
+    ctaSecondary: "Explore Campus"
+  },
+  welcome: {
+    title: "Welcome Message",
+    text: "At Lather High School, Karnal, we believe that education is about more than academic achievement. It is about nurturing curiosity, confidence, discipline, and strong values in every student.\n\nWe strive to provide a supportive environment where students can learn, grow, explore their talents, and develop into well-rounded individuals.\n\nOur goal is to prepare every child for a bright future with knowledge, character, and a sense of responsibility towards society.",
+    image: "/images/director-principal.jpg",
+    principalName: "Ms. Poonam Lather",
+    principalTitle: "Principal, Lather High School"
+  },
+  whyChooseUs: [
+    { title: "Experienced Faculty", description: "Dedicated and experienced teachers who guide students with care, encouragement, and individual attention.", icon: "Award" },
+    { title: "Academic Excellence", description: "A strong focus on academic fundamentals, disciplined learning, and helping every student achieve their full potential.", icon: "BookOpen" },
+    { title: "Values & Discipline", description: "We believe in building strong character through discipline, respect, responsibility, and good values.", icon: "Shield" },
+    { title: "Sports & Activities", description: "Encouraging students to participate in sports and co-curricular activities to develop confidence, teamwork, and a healthy spirit.", icon: "Activity" },
+    { title: "Supportive Environment", description: "A caring and positive school environment where students feel encouraged to learn, express themselves, and grow.", icon: "Sparkles" },
+    { title: "Opportunity for Every Child", description: "We believe that a child’s potential should never be limited by financial circumstances. Our vision is to create a nurturing and inclusive environment where children from diverse backgrounds can learn, grow, and build a brighter future.", icon: "Heart" }
+  ],
+  stats: {
+    yearsOfExcellence: 41,
+    students: 1800,
+    teachers: 120,
+    awards: 85
+  }
+};
 
 export default function AdminDashboardPage() {
   const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
   const [username, setUsername] = useState("Staff");
-  const [activeTab, setActiveTab] = useState<TabType>("blog");
+  const [activeTab, setActiveTab] = useState<TabType>("homepage");
   const [loading, setLoading] = useState(true);
 
   // --- CMS Data States ---
+  const [homepageData, setHomepageData] = useState<HomepageData>(defaultHomepageData);
   const [faculties, setFaculties] = useState<any[]>([]);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [newsList, setNewsList] = useState<any[]>([]);
@@ -47,13 +79,15 @@ export default function AdminDashboardPage() {
   const loadAllCmsData = async (authToken: string) => {
     try {
       setLoading(true);
-      const [facRes, blogRes, newsRes, galleryRes] = await Promise.all([
+      const [homeRes, facRes, blogRes, newsRes, galleryRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/cms/page/home`).then(res => res.ok ? res.json() : null),
         fetch(`${API_BASE_URL}/cms/faculty`).then(res => res.json()),
         fetch(`${API_BASE_URL}/cms/blog`).then(res => res.json()),
         fetch(`${API_BASE_URL}/cms/news`).then(res => res.json()),
         fetch(`${API_BASE_URL}/cms/gallery`).then(res => res.json()),
       ]);
 
+      if (homeRes && homeRes.hero) setHomepageData(homeRes);
       if (Array.isArray(facRes)) setFaculties(facRes);
       if (Array.isArray(blogRes)) setBlogs(blogRes);
       if (Array.isArray(newsRes)) setNewsList(newsRes);
@@ -64,6 +98,26 @@ export default function AdminDashboardPage() {
       setStatusErr("Error loading CMS content from backend.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // --- HOMEPAGE SUBMISSION ---
+  const handleSaveHomepage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${API_BASE_URL}/cms/page/home`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(homepageData)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to update homepage settings.");
+      triggerStatus("Homepage and Hero settings updated successfully!");
+    } catch (err: any) {
+      triggerStatus(err.message, true);
     }
   };
 
@@ -342,6 +396,16 @@ export default function AdminDashboardPage() {
         <nav className="flex flex-col gap-2 font-nav text-xs font-semibold uppercase tracking-wider flex-grow">
           
           <button
+            onClick={() => setActiveTab("homepage")}
+            className={`w-full text-left py-3 px-4 rounded-xl flex items-center gap-3 transition-colors cursor-pointer ${
+              activeTab === "homepage" ? "bg-primary text-white" : "text-white/60 hover:bg-white/5"
+            }`}
+          >
+            <LayoutTemplate className="w-4 h-4" />
+            Homepage & Hero
+          </button>
+
+          <button
             onClick={() => setActiveTab("blog")}
             className={`w-full text-left py-3 px-4 rounded-xl flex items-center gap-3 transition-colors cursor-pointer ${
               activeTab === "blog" ? "bg-primary text-white" : "text-white/60 hover:bg-white/5"
@@ -411,6 +475,176 @@ export default function AdminDashboardPage() {
           <div className="fixed bottom-6 right-6 z-[100] bg-primary text-white flex items-center gap-2 py-3.5 px-6 rounded-2xl shadow-xl font-body text-sm animate-slide-in">
             <AlertCircle className="w-4 h-4" />
             {statusErr}
+          </div>
+        )}
+
+        {/* --- HOMEPAGE CONTENT TAB --- */}
+        {activeTab === "homepage" && (
+          <div className="flex flex-col gap-8">
+            <div className="bg-white border border-gray-100 p-8 rounded-3xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="font-heading text-2xl font-bold text-gray-900">Homepage Content & Hero Settings</h1>
+                <p className="font-body text-xs text-gray-400 mt-1">
+                  Change the Admissions button text every academic session, hero tagline, subtitle, and welcome message.
+                </p>
+              </div>
+              <button
+                onClick={handleSaveHomepage}
+                className="font-nav text-xs font-bold uppercase tracking-wider bg-primary hover:bg-primary/95 text-white py-3.5 px-8 rounded-xl flex items-center gap-2 cursor-pointer shadow-md"
+              >
+                <Save className="w-4 h-4" />
+                Save Homepage Settings
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveHomepage} className="grid grid-cols-1 gap-8">
+              
+              {/* Hero Section Box */}
+              <div className="bg-white border border-gray-100 p-8 rounded-3xl shadow-sm flex flex-col gap-6">
+                <div className="border-b border-gray-100 pb-4">
+                  <h2 className="font-heading text-lg font-bold text-gray-900">Hero Section (Main Banner)</h2>
+                  <p className="text-xs text-gray-400 mt-0.5">Edit hero title, yearly admission text, and hero background.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-body text-sm">
+                  
+                  {/* Primary CTA (Admissions Open Year) */}
+                  <div className="flex flex-col gap-1.5 md:col-span-2 bg-amber-50/60 border border-amber-200/60 p-5 rounded-2xl">
+                    <label className="font-nav text-xs font-bold uppercase tracking-wider text-amber-900 flex items-center justify-between">
+                      <span>Primary CTA Button Text (Admissions Year)</span>
+                      <span className="text-[10px] text-amber-700 lowercase font-normal">Change this yearly without coding</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Admissions open 2026-27"
+                      value={homepageData.hero?.ctaPrimary || ""}
+                      onChange={(e) => setHomepageData({
+                        ...homepageData,
+                        hero: { ...homepageData.hero, ctaPrimary: e.target.value }
+                      })}
+                      className="border border-amber-300 rounded-xl px-4 py-3 bg-white outline-none focus:border-primary text-gray-900 font-semibold"
+                    />
+                    <span className="text-[11px] text-gray-500 mt-1">
+                      This button appears prominently on the homepage hero banner and header.
+                    </span>
+                  </div>
+
+                  {/* Tagline */}
+                  <div className="flex flex-col gap-1.5 md:col-span-2">
+                    <label className="font-nav text-xs font-bold uppercase tracking-wider text-gray-400">Hero Main Tagline</label>
+                    <input
+                      type="text"
+                      required
+                      value={homepageData.hero?.tagline || ""}
+                      onChange={(e) => setHomepageData({
+                        ...homepageData,
+                        hero: { ...homepageData.hero, tagline: e.target.value }
+                      })}
+                      className="border border-gray-200 rounded-xl px-4 py-3 bg-bg-light outline-none focus:border-primary text-gray-800 font-semibold"
+                    />
+                  </div>
+
+                  {/* Subtitle */}
+                  <div className="flex flex-col gap-1.5 md:col-span-2">
+                    <label className="font-nav text-xs font-bold uppercase tracking-wider text-gray-400">Hero Subtitle (Use Enter/Line break to separate lines)</label>
+                    <textarea
+                      rows={4}
+                      required
+                      value={homepageData.hero?.subtitle || ""}
+                      onChange={(e) => setHomepageData({
+                        ...homepageData,
+                        hero: { ...homepageData.hero, subtitle: e.target.value }
+                      })}
+                      className="border border-gray-200 rounded-xl px-4 py-3 bg-bg-light outline-none focus:border-primary text-gray-800"
+                    />
+                  </div>
+
+                  {/* Image URL */}
+                  <div className="flex flex-col gap-1.5 md:col-span-2">
+                    <label className="font-nav text-xs font-bold uppercase tracking-wider text-gray-400">Hero Background Campus Photo</label>
+                    <div className="flex items-center gap-4">
+                      <input
+                        type="text"
+                        value={homepageData.hero?.imageUrl || ""}
+                        onChange={(e) => setHomepageData({
+                          ...homepageData,
+                          hero: { ...homepageData.hero, imageUrl: e.target.value }
+                        })}
+                        className="border border-gray-200 rounded-xl px-4 py-3 bg-bg-light outline-none flex-grow text-gray-800"
+                      />
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          id="hero-image-uploader"
+                          className="hidden"
+                          onChange={(e) => handleFileUpload(e, (url) => setHomepageData({
+                            ...homepageData,
+                            hero: { ...homepageData.hero, imageUrl: url }
+                          }))}
+                        />
+                        <label htmlFor="hero-image-uploader" className="font-nav text-xs font-bold bg-secondary text-white py-3.5 px-6 rounded-xl flex items-center gap-1.5 cursor-pointer shadow-md">
+                          <Upload className="w-3.5 h-3.5" />
+                          Upload Photo
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Welcome Section Box */}
+              <div className="bg-white border border-gray-100 p-8 rounded-3xl shadow-sm flex flex-col gap-6">
+                <div className="border-b border-gray-100 pb-4">
+                  <h2 className="font-heading text-lg font-bold text-gray-900">Welcome Message Section</h2>
+                  <p className="text-xs text-gray-400 mt-0.5">Edit heading and message text.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-body text-sm">
+                  <div className="flex flex-col gap-1.5 md:col-span-2">
+                    <label className="font-nav text-xs font-bold uppercase tracking-wider text-gray-400">Section Heading</label>
+                    <input
+                      type="text"
+                      required
+                      value={homepageData.welcome?.title || ""}
+                      onChange={(e) => setHomepageData({
+                        ...homepageData,
+                        welcome: { ...homepageData.welcome, title: e.target.value }
+                      })}
+                      className="border border-gray-200 rounded-xl px-4 py-3 bg-bg-light outline-none focus:border-primary text-gray-800"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5 md:col-span-2">
+                    <label className="font-nav text-xs font-bold uppercase tracking-wider text-gray-400">Welcome Message Content</label>
+                    <textarea
+                      rows={6}
+                      required
+                      value={homepageData.welcome?.text || ""}
+                      onChange={(e) => setHomepageData({
+                        ...homepageData,
+                        welcome: { ...homepageData.welcome, text: e.target.value }
+                      })}
+                      className="border border-gray-200 rounded-xl px-4 py-3 bg-bg-light outline-none focus:border-primary text-gray-800"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Save Footer Action */}
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="font-nav text-xs font-bold uppercase tracking-wider bg-primary hover:bg-primary/95 text-white py-4 px-10 rounded-2xl flex items-center gap-2 cursor-pointer shadow-lg shadow-primary/30"
+                >
+                  <Save className="w-5 h-5" />
+                  Save Homepage Changes
+                </button>
+              </div>
+
+            </form>
           </div>
         )}
 

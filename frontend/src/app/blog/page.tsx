@@ -13,7 +13,6 @@ const fallbackBlogs: BlogPost[] = [
 export default function BlogPage() {
   const [blogs, setBlogs] = useState<BlogPost[]>(fallbackBlogs);
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     async function loadBlogs() {
@@ -26,13 +25,9 @@ export default function BlogPage() {
     loadBlogs();
   }, []);
 
-  const categories = ["All", ...Array.from(new Set(blogs.map((b) => b.category)))].sort();
-
   const filteredBlogs = blogs.filter((b) => {
-    const matchesSearch = b.title.toLowerCase().includes(search.toLowerCase()) || 
-                          b.content.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || b.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    return b.title.toLowerCase().includes(search.toLowerCase()) || 
+           b.content.toLowerCase().includes(search.toLowerCase());
   });
 
   // Split featured post and remaining posts
@@ -58,10 +53,9 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* 2. Filters & Search Box */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-8 py-10 flex flex-col sm:flex-row gap-4 items-center justify-between border-b border-gray-100">
-        {/* Search Input */}
-        <div className="relative w-full sm:max-w-md bg-bg-light border border-gray-100 rounded-xl p-1.5 focus-within:border-primary transition-colors flex items-center">
+      {/* 2. Search Box */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 pt-8 pb-4 flex items-center justify-between border-b border-gray-100">
+        <div className="relative w-full max-w-md bg-bg-light border border-gray-100 rounded-xl p-1.5 focus-within:border-primary transition-colors flex items-center">
           <Search className="w-4 h-4 text-gray-400 mx-3" />
           <input
             type="text"
@@ -70,23 +64,6 @@ export default function BlogPage() {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full bg-transparent outline-none text-sm text-gray-800 placeholder-gray-400 py-2"
           />
-        </div>
-
-        {/* Category List */}
-        <div className="flex gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 scrollbar-none">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`font-nav text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full border transition-all shrink-0 cursor-pointer ${
-                selectedCategory === cat
-                  ? "bg-primary border-primary text-white"
-                  : "border-gray-200 text-gray-600 hover:bg-gray-50"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
         </div>
       </section>
 

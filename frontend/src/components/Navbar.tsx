@@ -9,7 +9,6 @@ import { Menu, X, ChevronDown, User, ShieldAlert, GraduationCap } from "lucide-r
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Our Staff", href: "/staff" },
   { name: "Gallery", href: "/gallery" },
   { name: "Donate", href: "/donation" },
   { name: "FAQ", href: "/faq" },

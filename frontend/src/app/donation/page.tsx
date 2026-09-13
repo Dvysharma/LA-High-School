@@ -248,7 +248,7 @@ export default function DonationPage() {
                   <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
                   <h2 className="font-heading text-3xl font-bold text-gray-900 mb-4">Thank You for Your Generosity!</h2>
                   <p className="font-body text-base text-gray-600 leading-relaxed max-w-xl mx-auto mb-8">
-                    Dear <strong>{donorName}</strong>, we have recorded your notification regarding the donation of <strong>₹{currentAmount.toLocaleString()}</strong>. Our accounts department will verify the transaction and issue your tax exemption receipt at <strong>{donorEmail}</strong> shortly.
+                    Dear <strong>{donorName}</strong>, we have recorded your notification regarding the donation of <strong>₹{currentAmount.toLocaleString()}</strong>. Our accounts department will verify the transaction and issue your formal acknowledgement and receipt at <strong>{donorEmail}</strong> shortly.
                   </p>
                   <button
                     type="button"
@@ -355,17 +355,6 @@ export default function DonationPage() {
                   <span className="text-xs text-gray-400 block font-medium">Branch Details</span>
                   <span className="font-semibold text-gray-800 text-xs">{data.bankDetails.branch}</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Tax Exemption Note */}
-            <div className="bg-bg-light border border-gray-100 rounded-3xl p-6 flex gap-4 items-start shadow-sm">
-              <Award className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-              <div>
-                <h4 className="font-heading text-sm font-bold text-gray-900 mb-1">80G Tax Exemption</h4>
-                <p className="font-body text-xs text-gray-500 leading-relaxed">
-                  Lather High School Society is a registered charitable organization. All donations are 50% tax exempt under Section 80G of the Income Tax Act.
-                </p>
               </div>
             </div>
 

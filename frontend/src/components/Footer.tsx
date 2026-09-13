@@ -90,9 +90,6 @@ export default function Footer() {
               <Link href="/about" className="hover:text-[#F59E0B] transition-colors duration-300">About Us</Link>
             </li>
             <li>
-              <Link href="/staff" className="hover:text-[#F59E0B] transition-colors duration-300">Our Staff</Link>
-            </li>
-            <li>
               <Link href="/gallery" className="hover:text-[#F59E0B] transition-colors duration-300">Gallery</Link>
             </li>
             <li>
@@ -122,9 +119,16 @@ export default function Footer() {
               <Phone className="w-5 h-5 text-[#F59E0B] shrink-0" />
               <span>(+91) 94665 18003, (+91) 81686 53159</span>
             </li>
-            <li className="flex gap-3.5 items-center">
-              <Mail className="w-5 h-5 text-[#F59E0B] shrink-0" />
-              <span className="break-all">info@latherhigherschool.edu.in</span>
+            <li className="flex gap-3.5 items-start">
+              <Mail className="w-5 h-5 text-[#F59E0B] shrink-0 mt-0.5" />
+              <div className="flex flex-col gap-1">
+                <a href="mailto:admission@latherhighschool.com" className="hover:text-[#F59E0B] transition-colors break-all">
+                  admission@latherhighschool.com
+                </a>
+                <a href="mailto:latherhighschoo@gmail.com" className="hover:text-[#F59E0B] transition-colors break-all">
+                  latherhighschoo@gmail.com
+                </a>
+              </div>
             </li>
           </ul>
         </div>
