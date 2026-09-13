@@ -117,7 +117,7 @@ export default function Footer() {
             </li>
             <li className="flex gap-3.5 items-center">
               <Phone className="w-5 h-5 text-[#F59E0B] shrink-0" />
-              <span>(+91) 94665 18003, (+91) 81686 53159</span>
+              <span className="whitespace-nowrap">(+91) 94665 18003, (+91) 81686 53159</span>
             </li>
             <li className="flex gap-3.5 items-start">
               <Mail className="w-5 h-5 text-[#F59E0B] shrink-0 mt-0.5" />
