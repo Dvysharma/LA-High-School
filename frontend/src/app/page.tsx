@@ -186,9 +186,9 @@ export default function HomePage() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-6 right-5 sm:right-8 z-20 flex flex-col items-center gap-1.5 opacity-80">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 opacity-80">
           <span className="text-[10px] uppercase tracking-[0.25em] text-white font-semibold drop-shadow">Scroll</span>
-          <div className="w-[1.5px] h-10 bg-white/40 rounded relative overflow-hidden">
+          <div className="w-[1.5px] h-6 bg-white/40 rounded relative overflow-hidden">
             <motion.div
               animate={{ y: ["-100%", "100%"] }}
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
