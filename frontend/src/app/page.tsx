@@ -5,7 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   Award, BookOpen, Activity, Cpu, Shield, Sparkles, Heart,
-  ArrowRight, Calendar, MapPin, ChevronRight, Quote, Plus 
+  ArrowRight, Calendar, MapPin, ChevronRight, ChevronLeft, Quote, Plus,
+  X, Images, LayoutGrid, Maximize2, Baby, GraduationCap, Eye
 } from "lucide-react";
 import { getHomepage, getEvents, getNews, getGallery, HomepageData, SchoolEvent, SchoolNews, GalleryItem } from "@/utils/api";
 
@@ -68,12 +69,163 @@ const iconMap: Record<string, any> = {
   Heart,
 };
 
+interface WingPhoto {
+  url: string;
+  title: string;
+  description: string;
+}
+
+interface SchoolWing {
+  id: string;
+  name: string;
+  grades: string;
+  badge: string;
+  icon: typeof Baby;
+  description: string;
+  photos: WingPhoto[];
+}
+
+const schoolWings: SchoolWing[] = [
+  {
+    id: "pre-nursery",
+    name: "Pre-Nursery Wing",
+    grades: "Playgroup • Nursery • UKG",
+    badge: "Foundation & Early Childhood",
+    icon: Baby,
+    description: "Nurturing early childhood curiosity through joyful play-based discovery, sensory puzzle tables, guided storytelling, and dedicated indoor/outdoor activity zones.",
+    photos: [
+      {
+        url: "/images/pre-nursery-wing/image-1.jpg",
+        title: "Puzzle & Cognitive Activity Tables",
+        description: "Young learners developing problem-solving and motor skills with colorful shape and alphabet blocks."
+      },
+      {
+        url: "/images/pre-nursery-wing/image-2.jpg",
+        title: "Joyful Indoor Play Zone",
+        description: "Child-safe indoor slides and ball pit stations designed for happy physical coordination."
+      },
+      {
+        url: "/images/pre-nursery-wing/image-3.jpg",
+        title: "Courtyard Games & Early Literacy",
+        description: "Interactive ball play and alphabet charts in the sunlit open courtyard promoting social teamwork."
+      },
+      {
+        url: "/images/pre-nursery-wing/image-4.jpg",
+        title: "Pre-Nursery Explorers Play Station",
+        description: "Engaging ride-on toys, rockers, and vibrant learning walls in a welcoming, caring environment."
+      },
+      {
+        url: "/images/pre-nursery-wing/image-5.jpg",
+        title: "Teacher-Guided Story Reading",
+        description: "Dedicated educators guiding toddlers through colorful storybooks at group learning tables."
+      }
+    ]
+  },
+  {
+    id: "junior-wing",
+    name: "Junior Wing",
+    grades: "Classes 1st – 8th",
+    badge: "Primary & Middle Years",
+    icon: BookOpen,
+    description: "Fostering academic fundamentals, scientific curiosity through working models, stage confidence, discipline, and co-curricular merit.",
+    photos: [
+      {
+        url: "/images/junior-wing/image-1.jpg",
+        title: "Academic Felicitations & Merit Awards",
+        description: "Honoring diligent students with school shields and mementos for excellence in academics."
+      },
+      {
+        url: "/images/junior-wing/image-2.jpg",
+        title: "Disciplined Classroom Learning",
+        description: "Focused study and examination sessions instilling strong self-discipline and concentration."
+      },
+      {
+        url: "/images/junior-wing/image-3.jpg",
+        title: "Science Exhibition & Eco Innovation",
+        description: "Students presenting an 'Industrial Pollution Control & Water Treatment System' working project."
+      },
+      {
+        url: "/images/junior-wing/image-4.jpg",
+        title: "Public Speaking & Assembly Elocution",
+        description: "Encouraging voice, stage presence, and confidence through morning assemblies and speech forums."
+      },
+      {
+        url: "/images/junior-wing/image-5.jpg",
+        title: "Co-Curricular Honors & Certificates",
+        description: "Proud students receiving certificates of accomplishment alongside their supportive teachers."
+      }
+    ]
+  },
+  {
+    id: "senior-wing",
+    name: "Senior Wing",
+    grades: "Classes 9th – 12th",
+    badge: "Secondary & Senior Secondary",
+    icon: GraduationCap,
+    description: "Empowering young leaders with comprehensive board preparation, science & mathematics exhibitions, athletic competitions, faculty mentorship, and timeless cultural values.",
+    photos: [
+      {
+        url: "/images/senior-wing/image-1.jpg",
+        title: "Senior Science & Mathematics Exhibition",
+        description: "Senior students demonstrating comprehensive human anatomy and geometric angles projects."
+      },
+      {
+        url: "/images/senior-wing/image-2.jpg",
+        title: "Traditional Arts & Cultural Celebrations",
+        description: "Students showcasing creative mehendi designs during cultural celebration competitions."
+      },
+      {
+        url: "/images/senior-wing/image-3.jpg",
+        title: "Athletics & Badminton Competitions",
+        description: "Promoting physical fitness, competitive sportsmanship, and teamwork on the school courts."
+      },
+      {
+        url: "/images/senior-wing/image-4.jpg",
+        title: "Faculty Planning & Pedagogy Strategy",
+        description: "Leadership and educators collaborating on modern teaching strategies and student progress."
+      },
+      {
+        url: "/images/senior-wing/image-5.jpg",
+        title: "Campus Havan & Spiritual Character Values",
+        description: "School management, teachers, and senior students participating in traditional Vedic prayers."
+      }
+    ]
+  }
+];
+
 export default function HomePage() {
   const [homeData, setHomeData] = useState<HomepageData>(fallbackHome);
   const [events, setEvents] = useState<SchoolEvent[]>(fallbackEvents);
   const [news, setNews] = useState<SchoolNews[]>(fallbackNews);
   const [gallery, setGallery] = useState<GalleryItem[]>(fallbackGallery);
   const [activePhoto, setActivePhoto] = useState<string | null>(null);
+
+  // Wing Gallery Modal State
+  const [activeWingIndex, setActiveWingIndex] = useState<number | null>(null);
+  const [activeWingPhotoIndex, setActiveWingPhotoIndex] = useState<number>(0);
+  const [wingViewMode, setWingViewMode] = useState<"slider" | "grid">("slider");
+
+  // Keyboard navigation for Wing Gallery Modal
+  useEffect(() => {
+    if (activeWingIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveWingIndex(null);
+      } else if (e.key === "ArrowLeft") {
+        setActiveWingPhotoIndex((prev) => {
+          const count = schoolWings[activeWingIndex].photos.length;
+          return prev > 0 ? prev - 1 : count - 1;
+        });
+      } else if (e.key === "ArrowRight") {
+        setActiveWingPhotoIndex((prev) => {
+          const count = schoolWings[activeWingIndex].photos.length;
+          return prev < count - 1 ? prev + 1 : 0;
+        });
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeWingIndex]);
 
   useEffect(() => {
     async function loadData() {
@@ -300,69 +452,151 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. SCHOOL CULTURE SECTION */}
+      {/* 4. SCHOOL CULTURE & WINGS SECTION */}
       <section className="py-24 bg-white px-6 lg:px-8 border-b border-gray-100">
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary">Our School Culture</span>
+            <span className="font-nav text-xs font-bold uppercase tracking-[0.3em] text-primary flex items-center justify-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-accent" /> Our Student Wings & Culture
+            </span>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-4 leading-tight">
               Life & Values at Lather High School
             </h2>
-            <div className="w-12 h-[3px] bg-accent mx-auto mb-4" />
-            <p className="font-body text-gray-500">
-              A glimpse into the daily lives of our students, where spiritual harmony and deep academic focus blend to build complete characters.
+            <div className="w-16 h-[3px] bg-accent mx-auto mb-4" />
+            <p className="font-body text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Experience the vibrant journey of learning, discipline, and joy across our three specialized wings — from foundational early childhood curiosity to senior academic and cultural milestones.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
-            {/* Prayer and Spiritual assembly */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-bg-light border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
-            >
-              <div className="h-80 relative overflow-hidden bg-gray-100">
-                <img 
-                  src="/images/prayer.jpg" 
-                  alt="Students in Morning Prayer Assembly" 
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                />
-              </div>
-              <div className="p-8">
-                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Morning Assembly & Values</h3>
-                <p className="font-body text-sm text-gray-500 leading-relaxed">
-                  Each day begins with a meaningful morning assembly that encourages discipline, gratitude, positive thinking, and a strong sense of unity among our students. It sets a positive tone for the day ahead.
-                </p>
-              </div>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {schoolWings.map((wing, wingIdx) => {
+              const WingIcon = wing.icon;
+              return (
+                <motion.div
+                  key={wing.id}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: wingIdx * 0.15 }}
+                  className="bg-bg-light border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col group"
+                >
+                  {/* Card Header */}
+                  <div className="p-6 pb-4 flex items-center justify-between border-b border-gray-100/80 bg-white">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <WingIcon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading text-xl font-bold text-gray-900">{wing.name}</h3>
+                        <p className="font-nav text-xs font-semibold text-accent uppercase tracking-wider">{wing.grades}</p>
+                      </div>
+                    </div>
+                    <span className="font-nav text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-primary/5 text-primary rounded-full">
+                      5 Photos
+                    </span>
+                  </div>
 
-            {/* Study and Academic hours */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-bg-light border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
-            >
-              <div className="h-80 relative overflow-hidden bg-gray-100">
-                <img 
-                  src="/images/teacher-teaching.jpg" 
-                  alt="Teacher Teaching Students in Classroom" 
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                />
-              </div>
-              <div className="p-8">
-                <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">Academic Dedication & Learning</h3>
-                <p className="font-body text-sm text-gray-500 leading-relaxed">
-                  We encourage students to develop strong study habits, curiosity, and a genuine interest in learning. With the guidance of our teachers, students are encouraged to think independently, work together, and build confidence in their abilities.
-                </p>
-              </div>
-            </motion.div>
+                  {/* Main Featured Photo (Click to open full gallery) */}
+                  <div 
+                    onClick={() => {
+                      setActiveWingIndex(wingIdx);
+                      setActiveWingPhotoIndex(0);
+                      setWingViewMode("slider");
+                    }}
+                    className="relative h-64 overflow-hidden bg-gray-900 cursor-pointer"
+                  >
+                    <img 
+                      src={wing.photos[0].url} 
+                      alt={wing.photos[0].title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                    
+                    {/* Badge & quick click indicator */}
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-nav font-bold uppercase tracking-wider bg-white/90 text-gray-900 backdrop-blur-sm shadow">
+                        <Images className="w-3.5 h-3.5 text-primary" /> {wing.badge}
+                      </span>
+                    </div>
 
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <p className="text-white font-heading font-bold text-base leading-snug drop-shadow-sm">
+                        {wing.photos[0].title}
+                      </p>
+                      <div className="flex items-center gap-1.5 text-xs text-white/90 font-medium mt-1">
+                        <Maximize2 className="w-3.5 h-3.5 text-accent" />
+                        <span>Click to view all {wing.photos.length} photos</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4 Preview Thumbnails (Click any to open directly) */}
+                  <div className="grid grid-cols-4 gap-1.5 p-3 bg-white/80 border-b border-gray-100">
+                    {wing.photos.slice(1, 5).map((photo, photoIdx) => (
+                      <button
+                        key={photoIdx}
+                        type="button"
+                        onClick={() => {
+                          setActiveWingIndex(wingIdx);
+                          setActiveWingPhotoIndex(photoIdx + 1);
+                          setWingViewMode("slider");
+                        }}
+                        className="relative h-16 rounded-lg overflow-hidden group/thumb focus:outline-none focus:ring-2 focus:ring-primary hover:opacity-90 transition-opacity cursor-pointer bg-gray-100"
+                        title={photo.title}
+                      >
+                        <img 
+                          src={photo.url} 
+                          alt={photo.title}
+                          className="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover/thumb:bg-black/0 transition-colors" />
+                        <div className="absolute bottom-0 inset-x-0 bg-black/60 text-[9px] text-white text-center font-bold py-0.5 opacity-0 group-hover/thumb:opacity-100 transition-opacity">
+                          #{photoIdx + 2}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Card Description & Action */}
+                  <div className="p-6 flex flex-col justify-between flex-grow">
+                    <p className="font-body text-sm text-gray-600 leading-relaxed mb-6">
+                      {wing.description}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveWingIndex(wingIdx);
+                          setActiveWingPhotoIndex(0);
+                          setWingViewMode("slider");
+                        }}
+                        className="inline-flex items-center gap-2 font-nav text-xs font-bold uppercase tracking-wider text-primary hover:text-accent transition-colors duration-200 cursor-pointer"
+                      >
+                        <Images className="w-4 h-4" />
+                        <span>Explore Gallery ({wing.photos.length})</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveWingIndex(wingIdx);
+                          setActiveWingPhotoIndex(0);
+                          setWingViewMode("grid");
+                        }}
+                        className="inline-flex items-center gap-1.5 font-nav text-xs font-semibold text-gray-500 hover:text-gray-900 transition-colors duration-200 cursor-pointer"
+                        title="Open All Photos in Grid View"
+                      >
+                        <LayoutGrid className="w-3.5 h-3.5" />
+                        <span>View All</span>
+                      </button>
+                    </div>
+                  </div>
+
+                </motion.div>
+              );
+            })}
           </div>
 
         </div>
@@ -485,6 +719,207 @@ export default function HomePage() {
         >
           <button className="absolute top-6 right-6 text-white text-4xl">&times;</button>
           <img src={activePhoto} alt="Zoomed view" className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain cursor-default" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
+
+      {/* WING GALLERY LIGHTBOX MODAL */}
+      {activeWingIndex !== null && (
+        <div 
+          className="fixed inset-0 z-[110] bg-black/95 backdrop-blur-md flex flex-col justify-between animate-fadeIn select-none"
+          onClick={() => setActiveWingIndex(null)}
+        >
+          {/* Top Bar */}
+          <div 
+            className="flex flex-wrap items-center justify-between px-6 py-4 bg-gray-950/85 border-b border-white/10 z-20 gap-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Wing Selection Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto py-1">
+              {schoolWings.map((wing, idx) => (
+                <button
+                  key={wing.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveWingIndex(idx);
+                    setActiveWingPhotoIndex(0);
+                  }}
+                  className={`px-3.5 py-1.5 rounded-full font-nav text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                    activeWingIndex === idx
+                      ? "bg-primary text-white shadow-lg shadow-primary/30"
+                      : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
+                  }`}
+                >
+                  <span>{wing.name}</span>
+                  <span className="text-[10px] opacity-75">({wing.photos.length})</span>
+                </button>
+              ))}
+            </div>
+
+            {/* View Mode & Close Action */}
+            <div className="flex items-center gap-3 ml-auto">
+              {/* Toggle Grid vs Slider */}
+              <button
+                type="button"
+                onClick={() => setWingViewMode(wingViewMode === "slider" ? "grid" : "slider")}
+                className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-nav font-semibold uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer"
+              >
+                {wingViewMode === "slider" ? (
+                  <>
+                    <LayoutGrid className="w-3.5 h-3.5 text-accent" />
+                    <span>View All Grid</span>
+                  </>
+                ) : (
+                  <>
+                    <Images className="w-3.5 h-3.5 text-accent" />
+                    <span>Carousel View</span>
+                  </>
+                )}
+              </button>
+
+              {/* Photo Counter */}
+              {wingViewMode === "slider" && (
+                <span className="text-white/60 text-xs font-nav font-medium px-2 py-1 bg-white/5 rounded">
+                  {activeWingPhotoIndex + 1} / {schoolWings[activeWingIndex].photos.length}
+                </span>
+              )}
+
+              {/* Close Button */}
+              <button 
+                type="button"
+                onClick={() => setActiveWingIndex(null)}
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-red-600/80 text-white flex items-center justify-center transition-colors cursor-pointer"
+                title="Close (Esc)"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Modal Content */}
+          <div 
+            className="flex-1 overflow-y-auto flex items-center justify-center p-4 sm:p-6 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {wingViewMode === "slider" ? (
+              <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
+                {/* Image Box with Navigation Arrows */}
+                <div className="relative w-full max-h-[62vh] flex items-center justify-center">
+                  {/* Previous Button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const count = schoolWings[activeWingIndex].photos.length;
+                      setActiveWingPhotoIndex((prev) => (prev > 0 ? prev - 1 : count - 1));
+                    }}
+                    className="absolute left-2 sm:left-4 z-10 w-11 h-11 rounded-full bg-black/60 hover:bg-primary text-white flex items-center justify-center transition-all duration-200 cursor-pointer backdrop-blur-sm shadow-xl"
+                    title="Previous Photo (Left Arrow)"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+
+                  {/* Main Displayed Image */}
+                  <img 
+                    src={schoolWings[activeWingIndex].photos[activeWingPhotoIndex].url}
+                    alt={schoolWings[activeWingIndex].photos[activeWingPhotoIndex].title}
+                    className="max-h-[62vh] max-w-full rounded-2xl shadow-2xl object-contain border border-white/10"
+                  />
+
+                  {/* Next Button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const count = schoolWings[activeWingIndex].photos.length;
+                      setActiveWingPhotoIndex((prev) => (prev < count - 1 ? prev + 1 : 0));
+                    }}
+                    className="absolute right-2 sm:right-4 z-10 w-11 h-11 rounded-full bg-black/60 hover:bg-primary text-white flex items-center justify-center transition-all duration-200 cursor-pointer backdrop-blur-sm shadow-xl"
+                    title="Next Photo (Right Arrow)"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Caption / Description */}
+                <div className="text-center mt-4 max-w-2xl px-4">
+                  <h4 className="font-heading text-lg sm:text-xl font-bold text-white leading-snug">
+                    {schoolWings[activeWingIndex].photos[activeWingPhotoIndex].title}
+                  </h4>
+                  <p className="font-body text-xs sm:text-sm text-gray-300 mt-1 leading-relaxed">
+                    {schoolWings[activeWingIndex].photos[activeWingPhotoIndex].description}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              /* All Photos Grid View ("Click on one then all opens") */
+              <div className="w-full max-w-6xl mx-auto py-6">
+                <div className="text-center mb-6">
+                  <span className="font-nav text-xs font-bold text-accent uppercase tracking-widest">
+                    {schoolWings[activeWingIndex].grades}
+                  </span>
+                  <h3 className="font-heading text-2xl font-bold text-white mt-1">
+                    {schoolWings[activeWingIndex].name} — All Photos
+                  </h3>
+                  <p className="font-body text-xs text-gray-400 mt-1">
+                    Click any photo to view in high definition carousel mode.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {schoolWings[activeWingIndex].photos.map((photo, pIdx) => (
+                    <div
+                      key={pIdx}
+                      onClick={() => {
+                        setActiveWingPhotoIndex(pIdx);
+                        setWingViewMode("slider");
+                      }}
+                      className="bg-gray-900/90 border border-white/10 rounded-2xl overflow-hidden hover:border-primary/50 transition-all cursor-pointer group hover:-translate-y-1"
+                    >
+                      <div className="h-48 overflow-hidden bg-gray-950 relative">
+                        <img 
+                          src={photo.url} 
+                          alt={photo.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/70 text-white text-[10px] font-bold font-nav">
+                          #{pIdx + 1}
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h5 className="font-heading text-sm font-bold text-white leading-tight">{photo.title}</h5>
+                        <p className="font-body text-xs text-gray-400 mt-1 line-clamp-2">{photo.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Bottom Thumbnails Strip (Slider mode only) */}
+          {wingViewMode === "slider" && (
+            <div 
+              className="p-4 bg-gray-950/90 border-t border-white/10 z-20 flex justify-center items-center gap-3 overflow-x-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {schoolWings[activeWingIndex].photos.map((photo, pIdx) => (
+                <button
+                  key={pIdx}
+                  type="button"
+                  onClick={() => setActiveWingPhotoIndex(pIdx)}
+                  className={`relative w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden transition-all duration-200 cursor-pointer focus:outline-none flex-shrink-0 ${
+                    activeWingPhotoIndex === pIdx
+                      ? "ring-2 ring-accent scale-105 opacity-100 shadow-md shadow-accent/20"
+                      : "opacity-50 hover:opacity-90"
+                  }`}
+                  title={photo.title}
+                >
+                  <img src={photo.url} alt={photo.title} className="w-full h-full object-cover" />
+                  <div className="absolute bottom-0 inset-x-0 bg-black/60 text-[9px] text-white text-center font-bold">
+                    {pIdx + 1}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

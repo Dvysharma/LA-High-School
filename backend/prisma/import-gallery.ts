@@ -63,7 +63,25 @@ async function main() {
     { category: 'Events', url: '/images/dance.jpg', orderIndex: 10 },
     { category: 'Events', url: '/images/competition.jpg', orderIndex: 11 },
     { category: 'Campus', url: '/images/prayer.jpg', orderIndex: 12 },
-    { category: 'Campus', url: '/images/teacher-teaching.jpg', orderIndex: 13 }
+    { category: 'Campus', url: '/images/teacher-teaching.jpg', orderIndex: 13 },
+    // Pre-Nursery Wing
+    { category: 'Campus', url: '/images/pre-nursery-wing/image-1.jpg', orderIndex: 14 },
+    { category: 'Campus', url: '/images/pre-nursery-wing/image-2.jpg', orderIndex: 15 },
+    { category: 'Campus', url: '/images/pre-nursery-wing/image-3.jpg', orderIndex: 16 },
+    { category: 'Campus', url: '/images/pre-nursery-wing/image-4.jpg', orderIndex: 17 },
+    { category: 'Campus', url: '/images/pre-nursery-wing/image-5.jpg', orderIndex: 18 },
+    // Junior Wing
+    { category: 'Events', url: '/images/junior-wing/image-1.jpg', orderIndex: 19 },
+    { category: 'Campus', url: '/images/junior-wing/image-2.jpg', orderIndex: 20 },
+    { category: 'Labs', url: '/images/junior-wing/image-3.jpg', orderIndex: 21 },
+    { category: 'Events', url: '/images/junior-wing/image-4.jpg', orderIndex: 22 },
+    { category: 'Events', url: '/images/junior-wing/image-5.jpg', orderIndex: 23 },
+    // Senior Wing
+    { category: 'Labs', url: '/images/senior-wing/image-1.jpg', orderIndex: 24 },
+    { category: 'Events', url: '/images/senior-wing/image-2.jpg', orderIndex: 25 },
+    { category: 'Sports', url: '/images/senior-wing/image-3.jpg', orderIndex: 26 },
+    { category: 'Campus', url: '/images/senior-wing/image-4.jpg', orderIndex: 27 },
+    { category: 'Campus', url: '/images/senior-wing/image-5.jpg', orderIndex: 28 }
   ];
 
   for (const item of curatedItems) {

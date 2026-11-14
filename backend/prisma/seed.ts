@@ -9,7 +9,6 @@ async function main() {
   // Clear existing database to allow clean updates
   await prisma.faculty.deleteMany({});
   await prisma.alumni.deleteMany({});
-  await prisma.gallery.deleteMany({});
   await prisma.blog.deleteMany({});
   await prisma.event.deleteMany({});
   await prisma.news.deleteMany({});
@@ -204,16 +203,19 @@ async function main() {
     await prisma.faculty.create({ data: faculty });
   }
 
-  // Seed Gallery
-  const galleryData = [
-    { type: 'image', category: 'Campus', url: '/images/school-campus.jpg', orderIndex: 1 },
-    { type: 'image', category: 'Labs', url: '/images/computer-lab.jpg', orderIndex: 2 },
-    { type: 'image', category: 'Sports', url: '/images/students-playing.jpg', orderIndex: 3 },
-    { type: 'image', category: 'Events', url: '/images/dance-competition.jpg', orderIndex: 4 }
-  ];
+  // Seed Gallery if empty
+  const existingGalleryCount = await prisma.gallery.count();
+  if (existingGalleryCount === 0) {
+    const galleryData = [
+      { type: 'image', category: 'Campus', url: '/images/school-campus.jpg', orderIndex: 1 },
+      { type: 'image', category: 'Labs', url: '/images/computer-lab.jpg', orderIndex: 2 },
+      { type: 'image', category: 'Sports', url: '/images/students-playing.jpg', orderIndex: 3 },
+      { type: 'image', category: 'Events', url: '/images/dance-competition.jpg', orderIndex: 4 }
+    ];
 
-  for (const item of galleryData) {
-    await prisma.gallery.create({ data: item });
+    for (const item of galleryData) {
+      await prisma.gallery.create({ data: item });
+    }
   }
 
   // Seed Blogs
