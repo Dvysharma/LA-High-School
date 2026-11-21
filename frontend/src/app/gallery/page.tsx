@@ -4,19 +4,52 @@ import { useEffect, useState, useCallback } from "react";
 import { getGallery, GalleryItem } from "@/utils/api";
 import { X, ChevronLeft, ChevronRight, ImageIcon, Loader2, Sparkles } from "lucide-react";
 
-// Fallback images in case the API backend is not running/accessible
-const fallbackGallery: GalleryItem[] = Array.from({ length: 76 }, (_, i) => ({
-  id: -(i + 1),
+// Fallback images in case the API backend is not running/accessible (e.g. on Vercel deployment)
+const picnicFallback: GalleryItem[] = [
+  { id: -1, type: "image", url: "/images/picnic/picnic-1.jpeg", category: "Picnic & Outings", orderIndex: 1 },
+  { id: -2, type: "image", url: "/images/picnic/picnic-2.jpeg", category: "Picnic & Outings", orderIndex: 2 },
+  { id: -3, type: "image", url: "/images/picnic/picnic-3.jpeg", category: "Picnic & Outings", orderIndex: 3 },
+  { id: -4, type: "image", url: "/images/picnic/picnic-4.jpeg", category: "Picnic & Outings", orderIndex: 4 },
+  { id: -5, type: "image", url: "/images/picnic/picnic-5.jpeg", category: "Picnic & Outings", orderIndex: 5 },
+];
+
+const curatedFallback: GalleryItem[] = [
+  { id: -6, type: "image", url: "/images/school-campus.jpg", category: "Campus", orderIndex: 6 },
+  { id: -7, type: "image", url: "/images/computer-lab.jpg", category: "Labs", orderIndex: 7 },
+  { id: -8, type: "image", url: "/images/physical-exercise.jpg", category: "Sports", orderIndex: 8 },
+  { id: -9, type: "image", url: "/images/dance-competition.jpg", category: "Events", orderIndex: 9 },
+  { id: -10, type: "image", url: "/images/classroom.jpg", category: "Campus", orderIndex: 10 },
+  { id: -11, type: "image", url: "/images/library.jpg", category: "Campus", orderIndex: 11 },
+  { id: -12, type: "image", url: "/images/students-playing.jpg", category: "Sports", orderIndex: 12 },
+  { id: -13, type: "image", url: "/images/award.jpg", category: "Events", orderIndex: 13 },
+  { id: -14, type: "image", url: "/images/art.jpg", category: "Events", orderIndex: 14 },
+  { id: -15, type: "image", url: "/images/dance.jpg", category: "Events", orderIndex: 15 },
+  { id: -16, type: "image", url: "/images/competition.jpg", category: "Events", orderIndex: 16 },
+  { id: -17, type: "image", url: "/images/prayer.jpg", category: "Campus", orderIndex: 17 },
+  { id: -18, type: "image", url: "/images/teacher-teaching.jpg", category: "Campus", orderIndex: 18 },
+  // Wing Highlights
+  { id: -19, type: "image", url: "/images/pre-nursery-wing/image-1.jpg", category: "Pre-Nursery", orderIndex: 19 },
+  { id: -20, type: "image", url: "/images/pre-nursery-wing/image-2.jpg", category: "Pre-Nursery", orderIndex: 20 },
+  { id: -21, type: "image", url: "/images/junior-wing/image-1.jpg", category: "Junior Wing", orderIndex: 21 },
+  { id: -22, type: "image", url: "/images/junior-wing/image-3.jpg", category: "Junior Wing", orderIndex: 22 },
+  { id: -23, type: "image", url: "/images/senior-wing/image-1.jpg", category: "Senior Wing", orderIndex: 23 },
+  { id: -24, type: "image", url: "/images/senior-wing/image-3.jpg", category: "Senior Wing", orderIndex: 24 },
+];
+
+const generalFallback: GalleryItem[] = Array.from({ length: 81 }, (_, i) => ({
+  id: -(i + 50),
   type: "image",
   url: `/gallery/gallery-image-${i + 1}.jpeg`,
-  category: "Highlight",
-  orderIndex: i + 1
+  category: "Campus Moments",
+  orderIndex: i + 25
 }));
+
+const fallbackGallery: GalleryItem[] = [...picnicFallback, ...curatedFallback, ...generalFallback];
 
 export default function GalleryPage() {
   const [gallery, setGallery] = useState<GalleryItem[]>(fallbackGallery);
   const [loading, setLoading] = useState(true);
-  const [visibleCount, setVisibleCount] = useState(16);
+  const [visibleCount, setVisibleCount] = useState(24);
   
   // Lightbox States
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
@@ -131,12 +164,12 @@ export default function GalleryPage() {
                   />
                   
                   {/* Subtle Gradient Overlay on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6 rounded-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6 rounded-2xl">
                     <span className="font-nav text-[10px] font-bold uppercase tracking-widest text-accent mb-1 block">
-                      Memories
+                      {item.category || "Memories"}
                     </span>
                     <h3 className="font-heading text-base font-bold text-white leading-tight">
-                      Lather School Narrative
+                      {item.category === "Picnic & Outings" ? "School Picnic Moments" : "Lather School Narrative"}
                     </h3>
                   </div>
                 </div>
