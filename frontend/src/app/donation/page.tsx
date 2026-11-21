@@ -11,13 +11,13 @@ import { getDonationPage, DonationPageData } from "@/utils/api";
 const fallbackDonation: DonationPageData = {
   slogan: 'Together, We Can Shape More Futures',
   description: 'Education has the power to inspire lives and build a better tomorrow. Your support can help Lather High School provide greater opportunities for students, strengthen learning resources, and continue nurturing future generations. Every contribution, big or small, can make a meaningful difference in a student’s journey.',
-  qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=la.higherschool@sbi&pn=LA%20The%20Higher%20School&cu=INR',
+  qrCodeUrl: '/images/qr-code.jpeg',
   bankDetails: {
-    bankName: 'State Bank of India',
-    accountName: 'LATHER HIGH SCHOOL SOCIETY',
-    accountNumber: '39485720194',
-    ifsc: 'SBIN0001048',
-    branch: 'Sector 12 Branch, Karnal',
+    bankName: 'Canara Bank',
+    accountName: 'Lather Education Society',
+    accountNumber: '5053214000003',
+    ifsc: 'CNRB000503',
+    branch: 'Sector 16, Karnal',
   },
   causes: [
     { id: 'scholarship', title: 'Student Scholarships', description: 'Help talented students from economically weaker sections access quality education.' }
@@ -281,17 +281,37 @@ export default function DonationPage() {
                 Scan with GPay, PhonePe, Paytm, or any banking app to complete the transaction directly.
               </p>
 
-              <div className="bg-white p-6 border border-gray-100 rounded-2xl shadow-md mb-6 relative group overflow-hidden">
+              <div className="bg-white p-4 border border-gray-100 rounded-2xl shadow-md mb-4 relative group overflow-hidden max-w-[240px] w-full">
                 <img 
                   src={data.qrCodeUrl} 
-                  alt="Payment QR Code" 
-                  className="w-44 h-44 object-contain"
+                  alt="Lather Education Society Donation QR Code" 
+                  className="w-full h-auto object-contain rounded-lg"
                 />
+              </div>
+
+              {/* UPI ID Copy Block */}
+              <div className="w-full bg-white border border-gray-100 rounded-xl px-4 py-2.5 mb-6 flex items-center justify-between shadow-sm">
+                <div className="text-left">
+                  <span className="text-[10px] uppercase font-nav font-bold tracking-wider text-gray-400 block">UPI ID</span>
+                  <span className="font-mono text-xs font-semibold text-gray-800">990856920000003@cnrb</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy("990856920000003@cnrb", "upi")}
+                  className="text-gray-400 hover:text-primary p-1 cursor-pointer transition-colors"
+                  title="Copy UPI ID"
+                >
+                  {copiedField === "upi" ? (
+                    <span className="text-[10px] text-primary font-bold uppercase font-nav">Copied!</span>
+                  ) : (
+                    <Clipboard className="w-4 h-4" />
+                  )}
+                </button>
               </div>
 
               <a 
                 href={data.qrCodeUrl} 
-                download="Lather_School_Donation_QR.png" 
+                download="Lather_Education_Society_QR.jpeg" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-nav text-xs font-bold uppercase tracking-wider bg-secondary hover:bg-secondary/95 text-white py-3 px-5 rounded-xl flex items-center gap-2 transition-all shadow-md shrink-0 cursor-pointer"

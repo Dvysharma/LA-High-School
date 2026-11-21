@@ -681,29 +681,37 @@ export default function HomePage() {
                                   fallbackGallery.find((f) => f.category?.toLowerCase() === categoryName.toLowerCase()) ||
                                   fallbackGallery[0];
               return (
-                <div 
+                <Link 
                   key={categoryName} 
-                  className="group relative h-72 rounded-2xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer hover-zoom-container bg-gray-100"
-                  onClick={() => setActivePhoto(matchedItem.url)}
+                  href="/gallery"
+                  className="group relative h-72 rounded-2xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer hover-zoom-container bg-gray-100 block"
                 >
                   <img 
                     src={matchedItem.url} 
                     alt={matchedItem.category} 
                     className="absolute inset-0 w-full h-full object-cover hover-zoom-img"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300 flex items-end p-6" />
-                  <div className="absolute bottom-5 left-5 right-5 z-10">
-                    <span className="inline-block px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-md font-nav text-[10px] font-bold uppercase tracking-widest text-white mb-1 shadow-sm">
-                      {categoryName}
-                    </span>
-                    <h3 className="font-heading text-lg font-bold text-white drop-shadow-sm leading-tight">
-                      {categoryName === 'Campus' ? 'Campus & Building' :
-                       categoryName === 'Labs' ? 'Computer & Tech Lab' :
-                       categoryName === 'Sports' ? 'Athletics & Training' :
-                       'Events & Celebrations'}
-                    </h3>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300 flex items-end p-6" />
+                  <div className="absolute bottom-5 left-5 right-5 z-10 flex items-end justify-between">
+                    <div>
+                      <span className="inline-block px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-md font-nav text-[10px] font-bold uppercase tracking-widest text-white mb-1.5 shadow-sm">
+                        {categoryName}
+                      </span>
+                      <h3 className="font-heading text-lg font-bold text-white drop-shadow-sm leading-tight">
+                        {categoryName === 'Campus' ? 'Campus & Building' :
+                         categoryName === 'Labs' ? 'Computer & Tech Lab' :
+                         categoryName === 'Sports' ? 'Athletics & Training' :
+                         'Events & Celebrations'}
+                      </h3>
+                      <span className="inline-flex items-center gap-1 text-xs text-accent font-semibold font-nav mt-1.5 group-hover:underline">
+                        Explore in Gallery &rarr;
+                      </span>
+                    </div>
+                    <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-primary group-hover:scale-110 transition-all duration-300 shrink-0 mb-1">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

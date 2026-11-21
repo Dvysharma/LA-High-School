@@ -81,7 +81,13 @@ async function main() {
     { category: 'Events', url: '/images/senior-wing/image-2.jpg', orderIndex: 25 },
     { category: 'Sports', url: '/images/senior-wing/image-3.jpg', orderIndex: 26 },
     { category: 'Campus', url: '/images/senior-wing/image-4.jpg', orderIndex: 27 },
-    { category: 'Campus', url: '/images/senior-wing/image-5.jpg', orderIndex: 28 }
+    { category: 'Campus', url: '/images/senior-wing/image-5.jpg', orderIndex: 28 },
+    // Picnic Photos
+    { category: 'Events', url: '/images/picnic/picnic-1.jpeg', orderIndex: 29 },
+    { category: 'Events', url: '/images/picnic/picnic-2.jpeg', orderIndex: 30 },
+    { category: 'Events', url: '/images/picnic/picnic-3.jpeg', orderIndex: 31 },
+    { category: 'Events', url: '/images/picnic/picnic-4.jpeg', orderIndex: 32 },
+    { category: 'Events', url: '/images/picnic/picnic-5.jpeg', orderIndex: 33 }
   ];
 
   for (const item of curatedItems) {

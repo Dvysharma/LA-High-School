@@ -269,13 +269,13 @@ async function main() {
   const donationContent = {
     slogan: 'Together, We Can Shape More Futures',
     description: 'Education has the power to inspire lives and build a better tomorrow. Your support can help Lather High School provide greater opportunities for students, strengthen learning resources, and continue nurturing future generations. Every contribution, big or small, can make a meaningful difference in a student’s journey.',
-    qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=la.higherschool@sbi&pn=LA%20The%20Higher%20School&cu=INR',
+    qrCodeUrl: '/images/qr-code.jpeg',
     bankDetails: {
-      bankName: 'State Bank of India',
-      accountName: 'LATHER HIGH SCHOOL SOCIETY',
-      accountNumber: '39485720194',
-      ifsc: 'SBIN0001048',
-      branch: 'Sector 12 Branch, Karnal',
+      bankName: 'Canara Bank',
+      accountName: 'Lather Education Society',
+      accountNumber: '5053214000003',
+      ifsc: 'CNRB000503',
+      branch: 'Sector 16, Karnal',
     },
     causes: [
       { id: 'scholarship', title: 'Student Scholarships', description: 'Help talented students from economically weaker sections access quality education.' }
